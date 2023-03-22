@@ -1,11 +1,17 @@
 package com.example.demo.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "book_reviews")
-public class BookReviews {
+@Table(name = "profile_reviews")
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+public class ProfileReview {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int review_id;

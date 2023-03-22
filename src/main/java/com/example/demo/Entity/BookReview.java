@@ -3,9 +3,15 @@ package com.example.demo.Entity;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
-@Table(name = "profile_reviews")
-public class ProfileReviews {
+@Table(name = "book_reviews")
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+public class BookReview {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int review_id;
