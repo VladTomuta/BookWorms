@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.DTO.UserDTO;
 import com.example.demo.Entity.User;
 import com.example.demo.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,12 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/addUser")
-    public User addUser(@RequestBody User user){
+    public UserDTO addUser(@RequestBody User user){
         return userService.addUser(user);
     }
 
     @GetMapping("/getUser/{id}")
-    public User getUser(@PathVariable int id){
+    public UserDTO getUser(@PathVariable int id){
         return userService.getUser(id);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.DTO.BookDTO;
 import com.example.demo.Entity.Book;
 import com.example.demo.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +16,17 @@ public class BookController {
     private BookService bookService;
 
     @PostMapping("/addBook")
-    public Book addBook(@RequestBody Book book){
+    public BookDTO addBook(@RequestBody Book book){
         return bookService.addBook(book);
     }
 
     @GetMapping("/getBook/{id}")
-    public Book getBook(@PathVariable int id){
+    public BookDTO getBook(@PathVariable int id){
         return bookService.getBook(id);
     }
 
     @PutMapping("/updateBook/{id}")
-    public Book updateBook(@PathVariable int id, @RequestBody Book book){
+    public BookDTO updateBook(@PathVariable int id, @RequestBody Book book){
         return bookService.updateBook(id, book);
     }
 
@@ -36,7 +37,7 @@ public class BookController {
 
 
     @GetMapping("/getAllBooks")
-    public List<Book> getAllBooks(){
+    public List<BookDTO> getAllBooks(){
         return bookService.getAllBooks();
     }
 
