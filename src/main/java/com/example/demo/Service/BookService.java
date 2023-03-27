@@ -3,27 +3,60 @@ package com.example.demo.Service;
 import com.example.demo.DTO.BookDTO;
 import com.example.demo.DTOMapper.BookDTOMapper;
 import com.example.demo.Entity.Book;
+import com.example.demo.Entity.User;
 import com.example.demo.Exception.IncorrectIdException;
 import com.example.demo.Repository.BookRepository;
+import com.example.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class BookService {
-
-
     @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
     @Autowired
     private BookDTOMapper bookDTOMapper;
 
-    public BookDTO addBook(Book book){
-        return bookDTOMapper.apply(bookRepository.saveAndFlush(book));
+    public BookDTO addBook(int id, Book book){
+
+        if(book.getTitle().isEmpty() || book.getAuthor().isEmpty()
+                || book.getGenre().isEmpty())
+            throw new IncorrectIdException();
+
+        if(userRepository.findById(id).isPresent())
+        {
+            //for the actualUser I do the check on the above if
+            User actualUser = userRepository.findById(id).get();
+
+            if(bookRepository.findByTitleAndAuthor(book.getTitle(),book.getAuthor()).isPresent()){
+
+                Book actualBook = bookRepository.findByTitleAndAuthor(book.getTitle(),book.getAuthor()).get();
+                //I add to the old set of owners the new user that owns this exact book
+                actualBook.getOwnersOfTheBook().add(actualUser);
+                actualUser.getBooksIOwn().add(actualBook);
+
+                return bookDTOMapper.apply(bookRepository.saveAndFlush(actualBook));
+            }
+
+            //Collections.singleton(actualUser);
+            //[Returns an immutable set containing only the specified object. The returned set is serializable.]
+            actualUser.getBooksIOwn().add(book);
+            book.setOwnersOfTheBook(Collections.singleton(actualUser));
+            return bookDTOMapper.apply(bookRepository.saveAndFlush(book));
+        }
+        throw new IncorrectIdException();
     }
 
     public BookDTO getBook(int id){

@@ -15,9 +15,11 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @PostMapping("/addBook")
-    public BookDTO addBook(@RequestBody Book book){
-        return bookService.addBook(book);
+    // this method must be changed in order to add a book it must be assigned to a user/customer
+    // in order to do that I will assume that a user will add a book, not an independent book
+    @PostMapping("/{id}/addBook")
+    public BookDTO addBook(@PathVariable int id, @RequestBody Book book){
+        return bookService.addBook(id,book);
     }
 
     @GetMapping("/getBook/{id}")

@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "books")
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
@@ -21,8 +24,7 @@ public class Book {
     private String author;
     @Column(name = "genre", columnDefinition = "VARCHAR(255)")
     private String genre;
-    @Column(name = "rented_by_id", columnDefinition = "INTEGER")
-    private int Rented_by_id;
-    @Column(name = "owner_id", columnDefinition = "INTEGER")
-    private int Owner_id;
+
+    @ManyToMany
+    private Set<User> ownersOfTheBook = new HashSet<>();
 }

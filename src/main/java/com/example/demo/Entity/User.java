@@ -6,10 +6,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity(name = "users")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int user_id;
@@ -30,4 +32,10 @@ public class User {
 
     @Column(name = "password", columnDefinition = "VARCHAR(255)")
     private String password;
+
+    @ManyToMany
+    @JoinTable(name = "user_book",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn( name =  "book_id"))
+    private Set<Book> booksIOwn = new HashSet<>();
 }
