@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,4 +28,8 @@ public class Book {
 
     @ManyToMany
     private Set<User> ownersOfTheBook = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_book_id", referencedColumnName = "book_id")
+    private List<BookReview> bookReviews;
 }
