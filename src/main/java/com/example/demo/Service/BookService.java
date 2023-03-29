@@ -67,11 +67,11 @@ public class BookService {
                 .orElseThrow(IncorrectIdException::new);
     }
 
-    public List<BookDTO> getAllBooks() {
+    public Set<BookDTO> getAllBooks() {
         return bookRepository.findAll()
                 .stream()
                 .map(bookDTOMapper)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public BookDTO updateBook(int id, Book book) {

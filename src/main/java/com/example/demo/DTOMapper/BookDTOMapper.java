@@ -1,9 +1,7 @@
 package com.example.demo.DTOMapper;
 
 import com.example.demo.DTO.BookDTO;
-import com.example.demo.DTO.UserDTO;
 import com.example.demo.Entity.Book;
-import com.example.demo.Entity.User;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Function;

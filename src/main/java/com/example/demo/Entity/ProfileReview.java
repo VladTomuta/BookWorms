@@ -17,7 +17,7 @@ public class ProfileReview {
     private int review_id;
     @Column(name = "written_by_id", columnDefinition = "INTEGER")
     private int written_by_id;
-    @Column(name = "username", columnDefinition = "VARCHAR(255)")
+    @Column(name = "description", columnDefinition = "VARCHAR(255)")
     private String description;
     @Column(name = "rating", columnDefinition = "NUMERIC")
     private float rating;

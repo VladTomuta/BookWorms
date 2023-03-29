@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.DTO.ProfileReviewDTO;
 import com.example.demo.Entity.ProfileReview;
 import com.example.demo.Service.ProfileReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/profileReviews")
@@ -15,17 +17,17 @@ public class ProfileReviewController {
     private ProfileReviewService profileReviewService;
 
     @PostMapping("/addProfileReview")
-    public ProfileReview addProfileReview(@RequestBody ProfileReview profileReview){
+    public ProfileReviewDTO addProfileReview(@RequestBody ProfileReview profileReview){
         return profileReviewService.addProfileReview(profileReview);
     }
 
     @GetMapping("/getProfileReview/{id}")
-    public ProfileReview getProfileReview(@PathVariable int id){
+    public ProfileReviewDTO getProfileReview(@PathVariable int id){
         return profileReviewService.getProfileReview(id);
     }
 
     @PutMapping("/updateProfileReview/{id}")
-    public ProfileReview updateProfileReview(@PathVariable int id, @RequestBody ProfileReview profileReview){
+    public ProfileReviewDTO updateProfileReview(@PathVariable int id, @RequestBody ProfileReview profileReview){
         return profileReviewService.updateProfileReview(id, profileReview);
     }
 
@@ -36,7 +38,7 @@ public class ProfileReviewController {
 
 
     @GetMapping("/getAllProfileReview")
-    public List<ProfileReview> getAllBooks(){
+    public Set<ProfileReviewDTO> getAllBooks(){
         return profileReviewService.getAllProfileReviews();
     }
 

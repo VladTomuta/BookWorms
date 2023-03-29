@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/books")
@@ -39,7 +40,7 @@ public class BookController {
 
 
     @GetMapping("/getAllBooks")
-    public List<BookDTO> getAllBooks(){
+    public Set<BookDTO> getAllBooks(){
         return bookService.getAllBooks();
     }
 

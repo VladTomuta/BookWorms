@@ -1,33 +1,48 @@
 package com.example.demo.Service;
 
+import com.example.demo.DTO.RentDTO;
+import com.example.demo.DTOMapper.BookDTOMapper;
+import com.example.demo.DTOMapper.RentDTOMapper;
 import com.example.demo.Entity.Rent;
+import com.example.demo.Exception.IncorrectIdException;
 import com.example.demo.Repository.RentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class RentService {
 
     @Autowired
     private RentRepository rentRepository;
+    @Autowired
+    private RentDTOMapper rentDTOMapper;
 
-    public Rent addRent(Rent rent) {
-        return rentRepository.saveAndFlush(rent);
+    public RentDTO addRent(Rent rent) {
+        return rentDTOMapper.apply(rentRepository.saveAndFlush(rent));
     }
 
-    public Rent getRent(int id){
-        return rentRepository.findById(id).get();
+    public RentDTO getRent(int id){
+        return rentRepository.findById(id)
+                .stream()
+                .findAny()
+                .map(rentDTOMapper)
+                .orElseThrow(IncorrectIdException::new);
     }
 
-    public List<Rent> getAllRents() {
-        return rentRepository.findAll();
+    public Set<RentDTO> getAllRents() {
+        return  rentRepository.findAll()
+                .stream()
+                .map(rentDTOMapper)
+                .collect(Collectors.toSet());
     }
 
-    public Rent updateRent(int id, Rent rent) {
+    public RentDTO updateRent(int id, Rent rent) {
         if(rentRepository.findById(id).isPresent()) {
             Rent actualRent = rentRepository.findById(id).get();
 
@@ -51,10 +66,10 @@ public class RentService {
                 actualRent.setDate_of_return(rent.getDate_of_return());
             }
 
-            return rentRepository.saveAndFlush(actualRent);
+            return rentDTOMapper.apply(rentRepository.saveAndFlush(actualRent));
         }
 
-        return rent;
+        return rentDTOMapper.apply(rent);
     }
 
     public ResponseEntity<String> deleteRent(int id) {

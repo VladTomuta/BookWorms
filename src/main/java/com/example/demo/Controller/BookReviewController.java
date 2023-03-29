@@ -1,12 +1,13 @@
 package com.example.demo.Controller;
 
+import com.example.demo.DTO.BookReviewDTO;
 import com.example.demo.Entity.BookReview;
 import com.example.demo.Service.BookReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/bookReviews")
@@ -15,17 +16,17 @@ public class BookReviewController {
     private BookReviewService bookReviewService;
 
     @PostMapping("/addBookReview")
-    public BookReview addBookReview(@RequestBody BookReview bookReview){
+    public BookReviewDTO addBookReview(@RequestBody BookReview bookReview){
         return bookReviewService.addBookReview(bookReview);
     }
 
     @GetMapping("/getBookReview/{id}")
-    public BookReview getBookReview(@PathVariable int id){
+    public BookReviewDTO getBookReview(@PathVariable int id){
         return bookReviewService.getBookReview(id);
     }
 
     @PutMapping("/updateBookReview/{id}")
-    public BookReview updateBookReview(@PathVariable int id, @RequestBody BookReview bookReview){
+    public BookReviewDTO updateBookReview(@PathVariable int id, @RequestBody BookReview bookReview){
         return bookReviewService.updateBookReview(id, bookReview);
     }
 
@@ -35,7 +36,7 @@ public class BookReviewController {
     }
 
     @GetMapping("/getAllBookReviews")
-    public List<BookReview> getAllBookReviews(){
+    public Set<BookReviewDTO> getAllBookReviews(){
         return bookReviewService.getAllBookReviews();
     }
 

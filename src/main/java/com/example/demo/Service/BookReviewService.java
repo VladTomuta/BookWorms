@@ -1,32 +1,45 @@
 package com.example.demo.Service;
 
+import com.example.demo.DTO.BookReviewDTO;
+import com.example.demo.DTOMapper.BookReviewDTOMapper;
 import com.example.demo.Entity.BookReview;
+import com.example.demo.Exception.IncorrectIdException;
 import com.example.demo.Repository.BookReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class BookReviewService {
     @Autowired
     private BookReviewRepository bookReviewRepository;
+    @Autowired
+    private BookReviewDTOMapper bookReviewDTOMapper;
 
-    public BookReview addBookReview(BookReview bookReview){
-        return bookReviewRepository.saveAndFlush(bookReview);
+    public BookReviewDTO addBookReview(BookReview bookReview){
+        return bookReviewDTOMapper.apply(bookReviewRepository.saveAndFlush(bookReview));
     }
 
-    public BookReview getBookReview(int id){
-        return bookReviewRepository.findById(id).get();
+    public BookReviewDTO getBookReview(int id){
+        return bookReviewRepository.findById(id)
+                .stream()
+                .findAny()
+                .map(bookReviewDTOMapper)
+                .orElseThrow(IncorrectIdException::new);
     }
 
-    public List<BookReview> getAllBookReviews() {
-        return bookReviewRepository.findAll();
+    public Set<BookReviewDTO> getAllBookReviews() {
+        return bookReviewRepository.findAll()
+                .stream()
+                .map(bookReviewDTOMapper)
+                .collect(Collectors.toSet());
     }
 
-    public BookReview updateBookReview(int id, BookReview bookReview) {
+    public BookReviewDTO updateBookReview(int id, BookReview bookReview) {
         if(bookReviewRepository.findById(id).isPresent()){
             BookReview actualBookReview = bookReviewRepository.findById(id).get();
 
@@ -50,10 +63,10 @@ public class BookReviewService {
                 actualBookReview.setWritten_by_id(bookReview.getWritten_by_id());
             }
 
-            return bookReviewRepository.saveAndFlush(actualBookReview);
+            return bookReviewDTOMapper.apply(bookReviewRepository.saveAndFlush(actualBookReview));
         }
         //return some exception.
-        return bookReview;
+        return bookReviewDTOMapper.apply(bookReview);
     }
 
     public ResponseEntity<String> deleteBookReview(int id) {

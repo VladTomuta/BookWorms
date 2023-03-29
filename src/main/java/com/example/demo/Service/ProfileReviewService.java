@@ -1,6 +1,9 @@
 package com.example.demo.Service;
 
+import com.example.demo.DTO.ProfileReviewDTO;
+import com.example.demo.DTOMapper.ProfileReviewDTOMapper;
 import com.example.demo.Entity.ProfileReview;
+import com.example.demo.Exception.IncorrectIdException;
 import com.example.demo.Repository.ProfileReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,25 +11,36 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ProfileReviewService {
     @Autowired
     private ProfileReviewRepository profileReviewRepository;
+    @Autowired
+    private ProfileReviewDTOMapper profileReviewDTOMapper;
 
-    public ProfileReview addProfileReview(ProfileReview profileReview){
-        return profileReviewRepository.saveAndFlush(profileReview);
+    public ProfileReviewDTO addProfileReview(ProfileReview profileReview){
+        return profileReviewDTOMapper.apply(profileReviewRepository.saveAndFlush(profileReview));
     }
 
-    public ProfileReview getProfileReview(int id){
-        return profileReviewRepository.findById(id).get();
+    public ProfileReviewDTO getProfileReview(int id){
+        return profileReviewRepository.findById(id)
+                .stream()
+                .findAny()
+                .map(profileReviewDTOMapper)
+                .orElseThrow(IncorrectIdException::new);
     }
 
-    public List<ProfileReview> getAllProfileReviews() {
-        return profileReviewRepository.findAll();
+    public Set<ProfileReviewDTO> getAllProfileReviews() {
+        return profileReviewRepository.findAll()
+                .stream()
+                .map(profileReviewDTOMapper)
+                .collect(Collectors.toSet());
     }
 
-    public ProfileReview updateProfileReview(int id, ProfileReview profileReview) {
+    public ProfileReviewDTO updateProfileReview(int id, ProfileReview profileReview) {
         if(profileReviewRepository.findById(id).isPresent()){
             ProfileReview actualProfileReview = profileReviewRepository.findById(id).get();
 
@@ -50,10 +64,10 @@ public class ProfileReviewService {
                 actualProfileReview.setWritten_by_id(profileReview.getWritten_by_id());
             }
 
-            return profileReviewRepository.saveAndFlush(actualProfileReview);
+            return profileReviewDTOMapper.apply(profileReviewRepository.saveAndFlush(actualProfileReview));
         }
         //return some exception.
-        return profileReview;
+        return profileReviewDTOMapper.apply(profileReview);
     }
 
     public ResponseEntity<String> deleteProfileReview(int id) {

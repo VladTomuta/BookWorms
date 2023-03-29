@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.DTO.RentDTO;
 import com.example.demo.Entity.Rent;
 import com.example.demo.Service.RentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/rents")
@@ -17,17 +19,17 @@ public class RentController {
     private RentService rentService;
 
     @PostMapping("/addRent")
-    public Rent addBook(@RequestBody Rent rent){
+    public RentDTO addBook(@RequestBody Rent rent){
         return rentService.addRent(rent);
     }
 
     @GetMapping("/getRent/{id}")
-    public Rent getRent(@PathVariable int id){
+    public RentDTO getRent(@PathVariable int id){
         return rentService.getRent(id);
     }
 
     @PutMapping("/updateRent/{id}")
-    public Rent updateRent(@PathVariable int id, @RequestBody Rent rent){
+    public RentDTO updateRent(@PathVariable int id, @RequestBody Rent rent){
         return rentService.updateRent(id, rent);
     }
 
@@ -38,7 +40,7 @@ public class RentController {
 
 
     @GetMapping("/getAllRents")
-    public List<Rent> getAllRents(){
+    public Set<RentDTO> getAllRents(){
         return rentService.getAllRents();
     }
 }
