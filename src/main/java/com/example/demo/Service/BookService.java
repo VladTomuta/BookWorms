@@ -59,10 +59,11 @@ public class BookService {
         throw new IncorrectIdException();
     }
 
+    //replaced findAny with findFirst because the id is unique.
     public BookDTO getBook(int id){
         return bookRepository.findById(id)
                 .stream()
-                .findAny()
+                .findFirst()
                 .map(bookDTOMapper)
                 .orElseThrow(IncorrectIdException::new);
     }
@@ -86,7 +87,6 @@ public class BookService {
             if(book.getGenre() != null){
                 actualBook.setGenre(book.getGenre());
             }
-
             return bookDTOMapper.apply(bookRepository.saveAndFlush(book));
         }
         //return some exception.
