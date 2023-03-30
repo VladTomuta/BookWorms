@@ -1,0 +1,16 @@
+#spring.jpa.hibernate.ddl-auto=update
+#spring.datasource.url=jdbc:mysql://localhost:3306/bookwormsapplication
+#spring.datasource.username=root
+#spring.datasource.password=root
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/bookwormsapplication
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        show_sql: true
