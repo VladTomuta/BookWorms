@@ -1,7 +1,6 @@
 package com.example.demo.Service;
 
 import com.example.demo.DTO.RentDTO;
-import com.example.demo.DTOMapper.BookDTOMapper;
 import com.example.demo.DTOMapper.RentDTOMapper;
 import com.example.demo.Entity.Rent;
 import com.example.demo.Exception.IncorrectIdException;
