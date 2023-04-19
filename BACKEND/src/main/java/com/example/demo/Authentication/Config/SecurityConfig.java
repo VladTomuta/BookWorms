@@ -1,4 +1,4 @@
-package com.example.demo.Config;
+package com.example.demo.Authentication.Config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

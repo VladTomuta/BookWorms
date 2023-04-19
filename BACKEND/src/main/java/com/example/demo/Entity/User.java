@@ -34,7 +34,7 @@ public class User implements UserDetails {
     @Column(name = "password", columnDefinition = "VARCHAR(255)")
     private String password;
 
-    @ManyToMany//(mappedBy = "ownersOfTheBook")
+    @ManyToMany
     @JoinTable(name = "user_book",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn( name =  "book_id"))

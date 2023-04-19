@@ -5,6 +5,7 @@ public record UserDTO (
         String username,
         String fullName,
         String phoneNumber,
-        String email
+        String email,
+        String password
 ){
 }

@@ -1,4 +1,4 @@
-package com.example.demo.Controller;
+package com.example.demo.Service.Controller;
 
 import com.example.demo.DTO.BookDTO;
 import com.example.demo.Entity.Book;
