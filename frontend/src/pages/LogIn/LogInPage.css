@@ -51,11 +51,15 @@
     border-radius: 100px;
 }
 
-.logInForm a{
+a{
     text-decoration: none;
     color: black;
-    text-shadow: 0 0 3px #408E91 , 0 0 5px #408E91;
+}
 
+a:hover{
+    transition: 0.2s ease-in-out;
+    text-shadow: 0 0 3px #408E91   , 0 0 5px #408E91;
+    
 }
 
 
@@ -63,16 +67,18 @@
 .forgotpasstext{
     margin: 15px 0px 15px 30px;
     color: black;
+}
+
+.forgotpasstext:hover{
+    transition: 0.2s ease-in-out;
     text-shadow: 0 0 3px #408E91   , 0 0 5px #408E91;
-
-
+    
 }
 
 .logintext{
     font-size: 36px;
     font-weight: bold;
     color: black;
-    text-shadow: 0 0 3px #408E91   , 0 0 5px #408E91;
     align-self: start;
     margin: 15px 0px 0px 30px;
 }
@@ -98,7 +104,6 @@ button:hover{
 #logo{    
     width: 150px;
     height: 150px;
-    position: fixed;
     margin: 25px;
     top: 0;
     left: 0;

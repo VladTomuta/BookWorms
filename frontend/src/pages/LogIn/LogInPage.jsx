@@ -1,4 +1,5 @@
 import React,{useEffect, useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import YourSvg from "../../assets/logo_bookworms.svg";
 import "./LogInPage.css"
@@ -6,6 +7,9 @@ import "./LogInPage.css"
 function LogInPage() {
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
+
+
+    const navigate = useNavigate();
 
     const setUsernameOnChange = (e) =>{
         setUsername(e.target.value);
@@ -38,9 +42,13 @@ function LogInPage() {
 			});
 	};
 
+  const navigateToHomePage = () => {
+    navigate("/");
+  }
+
   return (
     <div className='logInFormContainer'>
-        <a href=''><img id="logo" src={YourSvg} alt="Your SVG" /></a>
+        <a href='#' onClick={navigateToHomePage}><img id="logo" src={YourSvg} alt="Your SVG" /></a>
         <div className='formBackground'>
           <form className='logInForm'>
             <span className='logintext'>SignIn</span>

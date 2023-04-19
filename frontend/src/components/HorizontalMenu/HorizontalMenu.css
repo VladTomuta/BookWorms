@@ -1,0 +1,28 @@
+.horizontal-menu-container{
+    display: flex;
+    height:50px;
+    margin: 10px 0px;
+    right: 35px;
+    top: 60px;
+}
+
+.horizontal-menu-container button{
+    margin: 0px;
+    border-radius: 0px;
+}
+
+.button1, .button3 {
+    background-color: rgb(175, 175, 175);
+}
+
+.button1:hover, .button3:hover {
+    background-color: rgb(158, 158, 158);
+}
+
+.button2, .button4 {
+    background-color: gray;
+}
+
+.button2:hover, .button4:hover {
+    background-color: rgb(144, 144, 144)
+}
