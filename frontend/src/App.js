@@ -1,6 +1,5 @@
 // import "./App.css";
 //import SignUp from "./pages/signUp/SignUp";
-import NavBar from "./components/NavBar/NavBar";
 import HomePage from "./pages/HomePage/HomePage";
 import LogInPage from "./pages/LogIn/LogInPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";

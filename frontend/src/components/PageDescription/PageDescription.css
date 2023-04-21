@@ -1,0 +1,30 @@
+.page-description{
+    display: flex;
+    flex-direction: row;
+    padding: 100px 100px 100px 100px;
+    background-color: #408E91;
+}
+#booksImage{
+    width: 500px;
+    height: 500px;
+}
+
+.text-container{
+    display: flex;
+    flex-direction: column;
+    margin: 0px 105px;
+    justify-content: center;
+}
+
+#title{
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+#description{
+    margin: 25px 0px;
+    font-size: 20px;
+    font-weight: 100;
+    width: 1200px;
+}

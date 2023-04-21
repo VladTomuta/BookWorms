@@ -1,13 +1,17 @@
 import React from 'react'
+import {useNavigate} from 'react-router-dom'
 import "./HorizontalMenu.css"
-
+ 
 function HorizontalMenu() {
+
+  const navigate = useNavigate();
+
   return (
     <div className='horizontal-menu-container'>
-        <button className='button1'>Available Books</button>
-        <button className='button2'>About Us</button>
-        <button className='button3'>Register</button>
-        <button className='button4'>LOGIN</button>
+        <button className='button1' onClick={() => navigate("/books")}>Available Books</button>
+        <button className='button2' onClick={() => navigate("/aboutUs")}>About Us</button>
+        <button className='button3' onClick={() => navigate("Registration")}>Register</button>
+        <button className='button4' onClick={() => navigate("/login")}>LOGIN</button>
     </div>
   )
 }

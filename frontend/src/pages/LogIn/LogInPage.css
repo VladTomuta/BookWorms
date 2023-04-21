@@ -102,8 +102,9 @@ button:hover{
 }
 
 #logo{    
-    width: 150px;
-    height: 150px;
+    position: fixed;
+    width: 300;
+    height: 300px;
     margin: 25px;
     top: 0;
     left: 0;

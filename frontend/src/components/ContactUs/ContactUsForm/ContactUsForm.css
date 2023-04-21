@@ -1,0 +1,38 @@
+input{
+    width: 340px;
+    padding: 15px 20px;
+    margin: 25px 0px;
+}
+textarea{
+
+    max-width: 340px;
+    max-height: 150px;
+    min-height: 150px;
+    resize: none;
+
+    padding: 15px 20px;
+    margin: 25px 0px;
+}
+input:nth-child(3){
+    width: 340px;
+    height: 150px;
+    text-align: start;
+}
+
+input:focus{
+    border: 3px solid blue;
+}
+
+#submitButton{
+    width: 300px;
+}
+
+.ContactUsForm-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 400px;
+    margin: 100px 0px;
+}

@@ -1,10 +1,4 @@
-.home_page_container{
+.home-page-container{
     display: flex;
     flex-direction: column;
-    background-color: #408E91;
-}
-
-.home_page_container #logo{
-    cursor: pointer;
-    margin: 34px;
 }

@@ -78,9 +78,9 @@ function ImageSlider() {
         <div className='lower-part'>
           <FaArrowAltCircleLeft className="left-arrow" onClick={left_button_slide} />
           <div className='bullets_container'>
-            <div style={{...(currentIndex===0 ? activeStyle : inactiveStyle)}}></div>
-            <div style={{...(currentIndex===1 ? activeStyle : inactiveStyle)}}></div>
-            <div style={{...(currentIndex===2 ? activeStyle : inactiveStyle)}}></div>
+            <div style={{...(currentIndex===0 ? activeStyle : inactiveStyle), cursor:"pointer" }} onClick={() => setCurrentIndex(0)}></div>
+            <div style={{...(currentIndex===1 ? activeStyle : inactiveStyle), cursor:"pointer" }} onClick={() => setCurrentIndex(1)}></div>
+            <div style={{...(currentIndex===2 ? activeStyle : inactiveStyle), cursor:"pointer" }} onClick={() => setCurrentIndex(2)}></div>
           </div>
           <FaArrowAltCircleRight className="right-arrow" onClick={right_button_slide} />
         </div>

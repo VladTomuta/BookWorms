@@ -1,0 +1,28 @@
+.FAQ-container{
+    display: flex;
+    flex-direction: column;
+    
+    margin: 100px 0px;
+}
+
+.question-answer-container{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0px;
+    max-width: 500px;
+}
+#question{
+    font-size: 20px;
+    font-weight: 700;
+    margin: 10px 0px;
+}
+#answer{
+    font-size: 18px;
+    font-weight: 400;
+    margin: 10px 0px;
+}
+
+#FAQ-title{
+    font-size: 28px;
+    font-weight: 1000;
+}
