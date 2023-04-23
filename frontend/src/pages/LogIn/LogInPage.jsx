@@ -8,6 +8,17 @@ function LogInPage() {
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
 
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+      loadUsers();
+    }, []);
+
+    const loadUsers = async () => {
+      const result = await axios.get("http://127.0.0.1:8080/users/getAllUsers")
+      console.log(result.data);
+    }
+
 
     const navigate = useNavigate();
 
@@ -15,10 +26,11 @@ function LogInPage() {
         setUsername(e.target.value);
     }
 
+    
     const setPasswordOnChange = (e) =>{
         setPassword(e.target.value);
     }
-
+    
     const LogInViaFacebook = (e) =>{
       return true
     }
@@ -27,6 +39,7 @@ function LogInPage() {
       return true
     }
 
+    /*
     const handleOnSubmitButton = async (e) => {
 		e.preventDefault();
 		await axios
@@ -41,6 +54,13 @@ function LogInPage() {
 				console.log("ceva nu a functionat corect");
 			});
 	};
+  */
+
+  const handleOnSubmitButton = (e) => {
+    e.preventDefault()
+    const student={username, password}
+    console.log(student)
+  }
 
   const navigateToHomePage = () => {
     navigate("/");
@@ -51,7 +71,7 @@ function LogInPage() {
         <a href='#' onClick={navigateToHomePage}><img id="logo" src={YourSvg} alt="Your SVG" /></a>
         <div className='formBackground'>
           <form className='logInForm'>
-            <span className='logintext'>SignIn</span>
+            <span className='logintext'>Log In</span>
             <input type="text" placeholder='email or phone number' onChange={setUsernameOnChange}></input>
             <input type="password" placeholder='password' onChange={setPasswordOnChange}></input>
             <a href='/' className='forgotpasstext'>Forgot password?</a>
@@ -68,3 +88,4 @@ function LogInPage() {
 }
  
 export default LogInPage
+

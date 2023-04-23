@@ -5,12 +5,14 @@ import com.example.demo.DTO.UserDTO;
 import com.example.demo.Entity.User;
 import com.example.demo.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin("http://localhost:3000")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -28,6 +30,11 @@ public class UserController {
     @GetMapping("/getAllUsers")
     public Set<UserDTO> getUser(){
         return userService.getAllUsers();
+    }
+
+    @DeleteMapping("/deleteUser/{id}")
+    public ResponseEntity<String> deleteBook(@PathVariable int id){
+        return userService.deleteUser(id);
     }
 
     @GetMapping("/{id}/booksOwned")

@@ -2,17 +2,14 @@ package com.example.demo.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder @Data
 @Entity(name = "users")
-public class User implements UserDetails {
+public class User /*implements UserDetails*/ {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int user_id;
@@ -48,6 +45,7 @@ public class User implements UserDetails {
     @JoinColumn(name = "fk_user_id", referencedColumnName = "user_id")
     private List<BookReview> bookReviews;
 
+    /*
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -72,4 +70,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
+    */
 }
