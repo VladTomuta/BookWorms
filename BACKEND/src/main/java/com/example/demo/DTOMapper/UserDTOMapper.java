@@ -11,11 +11,12 @@ public class UserDTOMapper implements Function<User, UserDTO> {
     @Override
     public UserDTO apply(User user) {
         return new UserDTO(
-                user.getUser_id(),
                 user.getUsername(),
                 user.getFullName(),
                 user.getPhoneNumber(),
-                user.getEmail()
+                user.getEmail(),
+                user.getRegion(),
+                user.getPassword()
         );
     }
 }

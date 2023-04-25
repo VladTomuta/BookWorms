@@ -45,7 +45,16 @@ public class User /*implements UserDetails*/ {
     @JoinColumn(name = "fk_user_id", referencedColumnName = "user_id")
     private List<BookReview> bookReviews;
 
-    /*
+    public User(String username, String fullName, String region, String phoneNumber, String email, String password) {
+        this.username = username;
+        this.fullName = fullName;
+        this.region = region;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.password = password;
+    }
+
+        /*
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
