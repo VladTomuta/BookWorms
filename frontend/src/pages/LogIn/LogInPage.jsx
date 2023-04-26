@@ -5,7 +5,7 @@ import YourSvg from "../../assets/logo_bookworms.svg";
 import "./LogInPage.css"
 
 function LogInPage() {
-    const [username,setUsername] = useState("");
+    const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
 
     const [users, setUsers] = useState([]);
@@ -22,8 +22,8 @@ function LogInPage() {
 
     const navigate = useNavigate();
 
-    const setUsernameOnChange = (e) =>{
-        setUsername(e.target.value);
+    const setEmailOnChange = (e) =>{
+        setEmail(e.target.value);
     }
 
     
@@ -39,32 +39,41 @@ function LogInPage() {
       return true
     }
 
-    /*
-    const handleOnSubmitButton = async (e) => {
-		e.preventDefault();
-		await axios
-			.post("/", {
-				username: username,
-				password: password,
-			})
-			.then((resp) => {
-				console.log("autentificat cu succes");
-			})
-			.catch((err) => {
-				console.log("ceva nu a functionat corect");
-			});
-	};
-  */
-
-  const handleOnSubmitButton = (e) => {
-    e.preventDefault()
-    const student={username, password}
-    console.log(student)
-  }
-
   const navigateToHomePage = () => {
     navigate("/");
   }
+
+  const handleOnSubmitButton = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://127.0.0.1:8080/users/login", {
+        email: email,
+        password: password,
+        }).then((res) =>
+        {
+          console.log(res.data);
+        
+          if(res.data.message == "Login Success")
+          {
+            
+            navigate('/home');
+          }
+          else
+          {
+            alert("Incorrect Email and Password");
+          }
+      }, fail => {
+        console.error(fail); // Error!
+         });
+    }
+
+      catch (err) {
+      alert(err);
+    }
+  
+  }
+
+    
 
   return (
     <div className='logInFormContainer'>
