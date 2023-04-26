@@ -99,26 +99,28 @@ function LogInPage() {
   }
 
   return (
-    <div className='logInFormContainer'>
-        <a href='#' onClick={navigateToHomePage}><img id="logo" src={YourSvg} alt="Your SVG" /></a>
-        <div className='formBackground'>
-          <form className='logInForm'>
-            <span className='logintext'>Sign Up</span>
-            <input type="text" placeholder='email' name='email' value={email} onChange={(e)=>onInputChange(e)}></input>
-            <input type="text" placeholder='full name' name='fullName' value={fullName} onChange={(e)=>onInputChange(e)}></input>
-            <input type="text" placeholder='username' name='username' value={username} onChange={(e)=>onInputChange(e)}></input>
-            <input type="password" placeholder='password' name='password' value={password} onChange={(e)=>onInputChange(e)}></input>
-            <input type="text" placeholder='phone number' name='phoneNumber' value={phoneNumber} onChange={(e)=>onInputChange(e)}></input>
-            <input type="text" placeholder='region' name='region' value={region} onChange={(e)=>onInputChange(e)}></input>
-            <a href='/' className='forgotpasstext'>Forgot password?</a>
-            
-            <button className='button' onClick={handleOnSubmitButton}>Sign Up</button>
-            <div className='line'></div>
-            <button className='button' onClick={LogInViaFacebook}>Facebook</button>
-            <button className='button' onClick={LogInViaGoogle}>Google</button>
-            <span className='AlreadyAMemberText'>Already a member? <a href='./login'>Log In</a></span>
-          </form>
-        </div>
+    <div className='PageContainer'>
+      <div className='logoContainer'>
+        <a href='#' onClick={navigateToHomePage}><img id="SignUpPagelogo" src={YourSvg} alt="Your SVG" /></a>
+      </div>
+      <div className='signUpFormContainer'>
+        <form className='signUpForm'>
+          <span className='signUpText'>Sign Up</span>
+          <input id='signUpInput' type="text" placeholder='email' name='email' value={email} onChange={(e)=>onInputChange(e)}></input>
+          <input id='signUpInput' type="text" placeholder='full name' name='fullName' value={fullName} onChange={(e)=>onInputChange(e)}></input>
+          <input id='signUpInput' type="text" placeholder='username' name='username' value={username} onChange={(e)=>onInputChange(e)}></input>
+          <input id='signUpInput' type="password" placeholder='password' name='password' value={password} onChange={(e)=>onInputChange(e)}></input>
+          <input id='signUpInput' type="text" placeholder='phone number' name='phoneNumber' value={phoneNumber} onChange={(e)=>onInputChange(e)}></input>
+          <input id='signUpInput' type="text" placeholder='region' name='region' value={region} onChange={(e)=>onInputChange(e)}></input>
+          <a href='/' className='forgotpasstext'>Forgot password?</a>
+          
+          <button className='signUpButton' onClick={handleOnSubmitButton}>Sign Up</button>
+          <div className='line'></div>
+          <button className='LogInViaFacebookButton' onClick={LogInViaFacebook}>Facebook</button>
+          <button className='LogInViaGoogleButton' onClick={LogInViaGoogle}>Google</button>
+          <span className='SignUpAlreadyAMember'>Already a member? <a href='./login'>Log In</a></span>
+        </form>
+      </div>
     </div>
   )
 }

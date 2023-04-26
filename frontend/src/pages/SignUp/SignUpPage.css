@@ -5,42 +5,56 @@
     font-size: 18px;
 }
 
-.logInFormContainer{
+.PageContainer{
     background-color: #408E91;
     height: 100vh;
     display: flex;
+}
 
+.signUpFormContainer{
+    background-color: #408E91;
+    height: 100vh;
+    width: 100%;
+    margin-right: 350px;
+
+    display: flex;
     justify-content: center;
     align-items: center;
 }
-.formBackground{
-    background-color: #C3C3E6 ;
-    border-radius: 8px;
-    width: 450px;
-    height: 550px;
 
-}
-.logInForm{
+
+.signUpForm{
     background-color: #C3C3E6 ;
+
+    width: 450px;
+    height: 850px;
+    padding: 25px 0px;
+    border-radius: 10px;
+
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.logInForm input{
-    border: 3px solid white;
-    padding: 5px 10px;
+#signUpInput{
+    padding: 15px 20px;
+    margin: 5px 25px;
     border-radius: 4px;
-    margin-top:5px;
-    border-color: none;
+
+    width: 350px;
+
     outline: none;
-    margin: 25px 30px 0px 30px;
+    border: none;
+    align-self: center;
 }
 
-.logInForm input:focus{
+#signUpInput:focus{
+    outline: none;
     border: none;
     border-bottom: 3px solid #E25822 ;
-    box-shadow: none;
-    padding: 8px 10px;
+    padding: 10px 15px;
+
 }
 
 .line{
@@ -62,8 +76,6 @@ a:hover{
     
 }
 
-
-
 .forgotpasstext{
     margin: 15px 0px 15px 30px;
     color: black;
@@ -72,18 +84,17 @@ a:hover{
 .forgotpasstext:hover{
     transition: 0.2s ease-in-out;
     text-shadow: 0 0 3px #408E91   , 0 0 5px #408E91;
-    
 }
 
-.logintext{
+.signUpText{
     font-size: 36px;
     font-weight: bold;
     color: black;
     align-self: start;
-    margin: 15px 0px 0px 30px;
+    margin: 15px 25px;
 }
 
-button{
+.signUpButton{
     padding: 15px 30px;
     font-weight: 600;
     background-color: #E25822 ;
@@ -93,20 +104,17 @@ button{
     margin: 15px 60px 15px 60px;
 }
 
-button:hover{
+.signUpButton:hover{
     background-color: #c44b1c ;
 }
 
-.notAMemberText{
-    margin: 15px 0px 0px 30px;
+.SignUpAlreadyAMember{
+    align-self: start;
+    margin: 15px 0px 15px 30px;
 }
 
-#logo{    
-    position: fixed;
-    width: 300;
+#SignUpPagelogo{    
+    width: 300px;
     height: 300px;
-    margin: 25px;
-    top: 0;
-    left: 0;
-    border-radius: 100px ;
+    margin: 55px;
 }

@@ -27,10 +27,10 @@ function LogInPage() {
     }, []);
     */
 
-    const loadUsers = async () => {
-      const result = await axios.get("http://127.0.0.1:8080/users/getAllUsers")
-      console.log(result.data);
-    }
+    // const loadUsers = async () => {
+    //   const result = await axios.get("http://127.0.0.1:8080/users/getAllUsers")
+    //   console.log(result.data);
+    // }
 
 
     const navigate = useNavigate();
@@ -92,21 +92,23 @@ function LogInPage() {
 
   return (
     <div className='logInFormContainer'>
+      <div className='logoContainer'>
         <a href='#' onClick={navigateToHomePage}><img id="logo" src={YourSvg} alt="Your SVG" /></a>
-        <div className='formBackground'>
-          <form className='logInForm'>
-            <span className='logintext'>Log In</span>
-            <input type="text" placeholder='email or phone number' onChange={setEmailOnChange}></input>
-            <input type="password" placeholder='password' onChange={setPasswordOnChange}></input>
-            <a href='/' className='forgotpasstext'>Forgot password?</a>
-            
-            <button className='button' onClick={handleOnSubmitButton}>Log In</button>
-            <div className='line'></div>
-            <button className='button' onClick={LogInViaFacebook}>Facebook</button>
-            <button className='button' onClick={LogInViaGoogle}>Google</button>
-            <span className='notAMemberText'>Not a member? <a href='./signup'>Sign Up</a></span>
-          </form>
-        </div>
+      </div>
+      <div className='FormContainer'>
+        <form className='logInForm'>
+          <span className='logintext'>Log In</span>
+          <input id='logInInput' type="text" placeholder='email or phone number' onChange={setUsernameOnChange}></input>
+          <input id='logInInput' type="password" placeholder='password' onChange={setPasswordOnChange}></input>
+          <a href='/' className='forgotpasstext'>Forgot password?</a>
+          
+          <button className='button' onClick={handleOnSubmitButton}>Log In</button>
+          <div className='line'></div>
+          <button className='button' onClick={LogInViaFacebook}>Facebook</button>
+          <button className='button' onClick={LogInViaGoogle}>Google</button>
+          <span className='notAMemberText'>Not a member? <a href='./signup'>Sign Up</a></span>
+        </form>
+      </div>
     </div>
   )
 }

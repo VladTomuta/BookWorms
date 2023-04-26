@@ -9,45 +9,56 @@
     background-color: #408E91;
     height: 100vh;
     display: flex;
+}
 
+.FormContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-right: 350px;
+    width: 100%;
+}
+
+.logInForm{
+    background-color: #C3C3E6 ;
+    
+    width: 450px;
+    height: 650px;
+
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.formBackground{
-    background-color: #C3C3E6 ;
-    border-radius: 8px;
-    width: 450px;
-    height: 550px;
 
-}
-.logInForm{
-    background-color: #C3C3E6 ;
-    display: flex;
-    flex-direction: column;
-}
-
-.logInForm input{
+#logInInput{
     border: 3px solid white;
-    padding: 5px 10px;
     border-radius: 4px;
-    margin-top:5px;
-    border-color: none;
+
+    padding: 10px 15px;
+    margin-left: 25px;
+
     outline: none;
-    margin: 25px 30px 0px 30px;
+
+    width: 350px;
+    height: auto;
+
+    align-self: flex-start;
 }
 
-.logInForm input:focus{
-    border: none;
+#logInInput:focus{
     border-bottom: 3px solid #E25822 ;
-    box-shadow: none;
-    padding: 8px 10px;
+    padding: 10px 15px;
+    outline: none;
 }
 
 .line{
-    width: auto;
+    width: 400px;
     height: 3px;
     background-color: #D9DBBC ;
-    margin: 0px 25px 0px 25px;
     border-radius: 100px;
 }
 
@@ -59,38 +70,42 @@ a{
 a:hover{
     transition: 0.2s ease-in-out;
     text-shadow: 0 0 3px #408E91   , 0 0 5px #408E91;
-    
 }
-
 
 
 .forgotpasstext{
     margin: 15px 0px 15px 30px;
     color: black;
+    width: 150px;
+    align-self: flex-start;
 }
 
 .forgotpasstext:hover{
     transition: 0.2s ease-in-out;
     text-shadow: 0 0 3px #408E91   , 0 0 5px #408E91;
-    
 }
 
 .logintext{
     font-size: 36px;
     font-weight: bold;
     color: black;
-    align-self: start;
+
+    align-self: flex-start;
+    justify-self: flex-start;
     margin: 15px 0px 0px 30px;
 }
 
 button{
     padding: 15px 30px;
+    width: 300px;
+    margin: 15px 60px 15px 60px;
+
     font-weight: 600;
     background-color: #E25822 ;
+
     border: none;
     border-radius: 15px;
     cursor: pointer;
-    margin: 15px 60px 15px 60px;
 }
 
 button:hover{
@@ -98,15 +113,19 @@ button:hover{
 }
 
 .notAMemberText{
+    align-self: flex-start;
+
     margin: 15px 0px 0px 30px;
 }
 
 #logo{    
-    position: fixed;
-    width: 300;
+    width: 300px;
     height: 300px;
-    margin: 25px;
-    top: 0;
-    left: 0;
-    border-radius: 100px ;
+    margin: 55px;
+}
+
+.logoContainer{
+    display: flex;
+    justify-content:flex-start;
+    align-items: flex-start;
 }
