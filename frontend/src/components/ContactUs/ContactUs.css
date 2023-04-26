@@ -17,11 +17,38 @@
 #contactUs-logo{
     width: 150px;
     height: 150px;
+    cursor: pointer;
+    z-index: 1;
 }
+#contactUs-logo:hover{
+    width: 150px;
+    height: 150px;
+
+    opacity: 30%;
+    border-radius: 100%;
+
+    cursor: pointer;
+    transition: ease 0.6s;
+}
+
 
 #contactUs-info-description{
     width: 450px;
     margin: 45px 0px;
     font-size: 22px;
     text-align: justify;
+}
+
+.scrollToTop{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ArrowUp{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    z-index: 0;
 }

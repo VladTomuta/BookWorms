@@ -64,7 +64,7 @@ function LogInPage() {
   return (
     <div className='PageContainer'>
       <div className='logoContainer'>
-        <a href='#' onClick={navigateToHomePage}><img id="SignUpPagelogo" src={YourSvg} alt="Your SVG" /></a>
+        <a  onClick={navigateToHomePage}><img id="SignUpPagelogo" src={YourSvg} alt="Your SVG" /></a>
       </div>
       <div className='signUpFormContainer'>
         <form className='signUpForm'>

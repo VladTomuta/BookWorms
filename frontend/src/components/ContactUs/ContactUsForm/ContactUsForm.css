@@ -1,7 +1,10 @@
 #mailInput, #fullNameInput{
     width: 340px;
     padding: 15px 20px;
-    margin: 25px 0px;
+    margin: 10px 0px;
+    
+    border: none;
+    outline: none;
 }
 #message{
 
@@ -11,12 +14,18 @@
     resize: none;
 
     padding: 15px 20px;
-    margin: 25px 0px;
+    margin: 10px 0px;
+
+    border: none;
+    outline: none;
 }
 
+#message:focus{
+    border: 3px solid lightblue;
+}
 
 #mailInput:focus, #fullNameInput:focus{
-    border: 3px solid blue;
+    border: 3px solid lightblue;
 }
 
 #submitButton{

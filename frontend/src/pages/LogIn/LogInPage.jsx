@@ -83,7 +83,7 @@ function LogInPage() {
       <div className='FormContainer'>
         <form className='logInForm'>
           <span className='logintext'>Log In</span>
-          <input id='logInInput' type="text" placeholder='email or phone number' onChange={setUsernameOnChange}></input>
+          <input id='logInInput' type="text" placeholder='email or phone number' onChange={setEmailOnChange}></input>
           <input id='logInInput' type="password" placeholder='password' onChange={setPasswordOnChange}></input>
           <a href='/' className='forgotpasstext'>Forgot password?</a>
           

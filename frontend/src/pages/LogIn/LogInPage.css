@@ -39,7 +39,7 @@
     border-radius: 4px;
 
     padding: 10px 15px;
-    margin-left: 25px;
+    margin: 15px 0px 15px 30px;
 
     outline: none;
 
@@ -92,7 +92,7 @@ a:hover{
 
     align-self: flex-start;
     justify-self: flex-start;
-    margin: 15px 0px 0px 30px;
+    margin: 15px 0px 15px 30px;
 }
 
 button{
