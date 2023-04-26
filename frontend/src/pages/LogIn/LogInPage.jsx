@@ -5,14 +5,27 @@ import YourSvg from "../../assets/logo_bookworms.svg";
 import "./LogInPage.css"
 
 function LogInPage() {
+  const [user, setUser] = useState(
+    {
+      email:"",
+      fullName:"",
+      username:"",
+      password:"",
+      phoneNumber:"",
+      region:""
+    }
+  );
+
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
 
+    /*
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
       loadUsers();
     }, []);
+    */
 
     const loadUsers = async () => {
       const result = await axios.get("http://127.0.0.1:8080/users/getAllUsers")
@@ -53,10 +66,16 @@ function LogInPage() {
         {
           console.log(res.data);
         
-          if(res.data.message == "Login Success")
+          if(res.data.status == true)
           {
-            
-            navigate('/home');
+            console.log(res.data.user.role);
+
+            if(res.data.user.role == "USER") {
+              navigate("/home")
+            } else {
+              navigate("/admin")
+            }
+              
           }
           else
           {
@@ -66,14 +85,10 @@ function LogInPage() {
         console.error(fail); // Error!
          });
     }
-
       catch (err) {
       alert(err);
     }
-  
   }
-
-    
 
   return (
     <div className='logInFormContainer'>

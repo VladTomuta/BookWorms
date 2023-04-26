@@ -2,9 +2,11 @@ package com.example.demo.Controller;
 
 import com.example.demo.DTO.BookDTO;
 import com.example.demo.DTO.LoginDTO;
+import com.example.demo.DTO.SignupDTO;
 import com.example.demo.DTO.UserDTO;
 import com.example.demo.Entity.User;
 import com.example.demo.Response.LoginResponse;
+import com.example.demo.Response.SignupResponse;
 import com.example.demo.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,15 +26,16 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/addUser")
-    public UserDTO addUser(@RequestBody UserDTO userDTO){
+    public UserDTO addUser(@RequestBody SignupDTO signupDTO){
 
         User user = new User(
-                userDTO.username(),
-                userDTO.fullName(),
-                userDTO.region(),
-                userDTO.phoneNumber(),
-                userDTO.email(),
-                this.passwordEncoder.encode(userDTO.password())
+                signupDTO.username(),
+                signupDTO.fullName(),
+                signupDTO.region(),
+                signupDTO.phoneNumber(),
+                signupDTO.email(),
+                this.passwordEncoder.encode(signupDTO.password()),
+                "USER"
         );
 
         return userService.addUser(user);
@@ -64,5 +67,9 @@ public class UserController {
         return ResponseEntity.ok(loginResponse);
     }
 
-
+    @PostMapping(path = "/signup")
+    public ResponseEntity<?> signupUser(@RequestBody SignupDTO signupDTO) {
+        SignupResponse signupResponse = userService.signupUser(signupDTO);
+        return ResponseEntity.ok(signupResponse);
+    }
 }

@@ -31,6 +31,9 @@ public class User /*implements UserDetails*/ {
     @Column(name = "password", columnDefinition = "VARCHAR(255)")
     private String password;
 
+    @Column(name ="role", columnDefinition = "VARCHAR(255)")
+    private String role;
+
     @ManyToMany//(mappedBy = "ownersOfTheBook")
     @JoinTable(name = "user_book",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -45,13 +48,14 @@ public class User /*implements UserDetails*/ {
     @JoinColumn(name = "fk_user_id", referencedColumnName = "user_id")
     private List<BookReview> bookReviews;
 
-    public User(String username, String fullName, String region, String phoneNumber, String email, String password) {
+    public User(String username, String fullName, String region, String phoneNumber, String email, String password, String role) {
         this.username = username;
         this.fullName = fullName;
         this.region = region;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
         /*
