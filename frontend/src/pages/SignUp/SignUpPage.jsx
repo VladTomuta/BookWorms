@@ -53,8 +53,45 @@ function LogInPage() {
   const handleOnSubmitButton = async (e) => {
     e.preventDefault()
     console.log(user)
-    await axios.post("http://127.0.0.1:8080/users/addUser",user)
-    navigate("/");
+
+    
+
+    try {
+      await axios.post("http://127.0.0.1:8080/users/signup",user)
+      .then((res) =>
+        {
+          console.log(res.data);
+
+          if(res.data.status == true) {
+            navigate("/");
+          } else {
+            alert(res.data.message);
+          }
+        
+          /*
+          if(res.data.status == true)
+          {
+            console.log(res.data.user.role);
+
+            if(res.data.user.role == "USER") {
+              navigate("/home")
+            } else {
+              navigate("/admin")
+            }
+              
+          }
+          else
+          {
+            alert("Incorrect Email and Password");
+          }
+          */
+      }, fail => {
+        console.error(fail); // Error!
+         });
+    }
+      catch (err) {
+      alert(err);
+    }
   }
 
   const navigateToHomePage = () => {

@@ -1,13 +1,11 @@
 package com.example.demo.DTO;
 
-public record UserDTO (
-        Integer user_id,
+public record SignupDTO (
         String username,
         String fullName,
         String phoneNumber,
         String email,
         String region,
-        String password,
-        String role
+        String password
 ){
 }
