@@ -3,8 +3,7 @@ import SignUp from "./pages/SignUp/SignUpPage";
 import HomePage from "./pages/HomePage/HomePage";
 import LogInPage from "./pages/LogIn/LogInPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import React from "react"
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import React from "react";
 
 function App() {
 	return (
