@@ -59,7 +59,7 @@ function LogInPage() {
   const handleOnSubmitButton = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://127.0.0.1:8080/users/login", {
+      const response = await axios.post("http://127.0.0.1:8080/users/login", {
         email: email,
         password: password,
         }).then((res) =>

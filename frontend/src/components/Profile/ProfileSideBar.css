@@ -1,0 +1,103 @@
+.Profile-Container{
+    display: flex;
+    flex-direction: column;
+
+    font-size: 18px;
+
+    background-color: gray;
+    width: 350px;
+    height: 100vh;
+
+}
+
+.profilePicture{
+    margin: 25px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 300px;
+    height: 300px;
+    background-color: lightgray;
+    border-radius: 100%;
+}
+
+#profile-picture-placeholder{
+    font-size: 24px;
+    font-weight: 700;
+}
+
+#below-profilePic{
+    align-self: center;
+    font-size: 22px;
+}
+
+.buttonTitle{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.profileButtonsContainer{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.profile-button:nth-child(even){
+    background-color: #8d8d8d;
+    width: 100%;
+    text-align: center;
+    padding: 15px 0px;
+    cursor: pointer;
+}
+
+.profile-button:nth-child(even):hover{
+    background-color: rgb(100, 100, 100);
+    width: 100%;
+    text-align: center;
+    padding: 15px 0px;
+    cursor: pointer;
+}
+
+
+.profile-button:nth-child(odd){
+    background-color: #9d9d9d;
+    padding: 15px 0px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.profile-button:nth-child(odd):hover{
+    background-color: rgb(87, 87, 87);
+    padding: 15px 0px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+#logOutButton{
+    background-color: #8d8d8d;
+    outline: none;
+    border: none;
+    
+    align-self: center;
+
+    width: 200px;
+    height: 50px;
+
+    cursor: pointer;
+}
+
+#logOutButton:hover{
+    background-color: #a4a4a4;
+}
+
+.logOutContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 450px;    
+}

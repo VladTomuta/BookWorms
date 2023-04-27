@@ -5,14 +5,16 @@ import PageDescription from '../../components/PageDescription/PageDescription';
 import AboutUs from '../../components/AboutUs/AboutUs'
 import ContactUs from '../../components/ContactUs/ContactUs';
 
-
 function HomePage() {
+
   return (
     <div className='home-page-container'>
       <ImageSlider/>  
       <PageDescription/>
       <AboutUs />
       <ContactUs/>
+      <div style={{width:"500px", height:"500px"}}>
+      </div>
     </div>
 
 
