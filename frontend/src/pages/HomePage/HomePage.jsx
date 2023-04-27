@@ -13,8 +13,6 @@ function HomePage() {
       <PageDescription/>
       <AboutUs />
       <ContactUs/>
-      <div style={{width:"500px", height:"500px"}}>
-      </div>
     </div>
 
 

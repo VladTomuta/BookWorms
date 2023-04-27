@@ -71,7 +71,7 @@ function LogInPage() {
             console.log(res.data.user.role);
 
             if(res.data.user.role == "USER") {
-              navigate("/home")
+              navigate("/loggedIn")
             } else {
               navigate("/admin")
             }

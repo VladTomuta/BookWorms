@@ -101,6 +101,7 @@ a:hover{
     border-radius: 15px;
     cursor: pointer;
     margin: 15px 60px 15px 60px;
+    width: 300px;
 }
 
 .signUpButton:hover{
@@ -116,6 +117,26 @@ a:hover{
     width: 300px;
     height: 300px;
     margin: 55px;
-
     cursor: pointer;
+}
+
+.LogInViaGoogleButton{
+    padding: 15px 30px;
+    font-weight: 600;
+    width: 300px;
+    background-color: #E25822 ;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    margin: 15px 60px 15px 60px;
+}
+.LogInViaFacebookButton{
+    padding: 15px 30px;
+    font-weight: 600;
+    width: 300px;
+    background-color: #E25822 ;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    margin: 15px 60px 15px 60px;
 }

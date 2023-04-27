@@ -29,8 +29,19 @@
 }
 
 #submitButton{
+    border-radius: 5px;
+    margin: 25px 0px;
     width: 300px;
+    height: 40px;
+    background-color: #E25822;
+    outline: none;
+    border: none;
 }
+
+#submitButton:hover{
+    background-color: #c44b1c;
+    cursor: pointer;
+}   
 
 .ContactUsForm-container{
     display: flex;

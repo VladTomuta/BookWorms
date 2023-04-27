@@ -9,6 +9,12 @@
 .horizontal-menu-container button{
     margin: 0px;
     border-radius: 0px;
+    width: 200px;
+    height: 50px;
+    outline: none;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
 }
 
 .button1, .button3 {
