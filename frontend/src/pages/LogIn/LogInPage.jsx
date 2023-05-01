@@ -5,6 +5,7 @@ import YourSvg from "../../assets/logo_bookworms.svg";
 import "./LogInPage.css"
 
 function LogInPage() {
+
   const [user, setUser] = useState(
     {
       email:"",
@@ -71,7 +72,9 @@ function LogInPage() {
             console.log(res.data.user.role);
 
             if(res.data.user.role == "USER") {
-              navigate("/loggedIn")
+              //history.push("/loggedIn",res.data.user.user_id)
+              //navigate.push("/loggedIn", res.data.user.user_id)
+              navigate("/loggedIn", {state:{id:res.data.user.user_id}})
             } else {
               navigate("/admin")
             }

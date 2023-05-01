@@ -1,6 +1,10 @@
 import React from 'react'
 import './ProfileSideBar.css'
+import {useNavigate, useLocation} from 'react-router-dom'
 function ProfileSideBar() {
+
+    const location = useLocation();
+    const navigate = useNavigate();
     const username = "Profile Picture"
   return (
     <div className='Profile-Container'>
@@ -16,11 +20,11 @@ function ProfileSideBar() {
               <span className='buttonTitle'>Find Books</span>
           </div>
           <div className='profile-button'>
-              <span className='buttonTitle'>Put a Book yourself</span>
+              <span className='buttonTitle' onClick={() => navigate("/addBook", {state:{id:location.state.id}})}>Put a Book yourself</span>
           </div>
         </div>
         <div className='logOutContainer'>
-          <button id='logOutButton'>Log Out</button>
+          <button id='logOutButton' onClick={() => navigate("/")}>Log Out</button>
         </div>
     </div>
   )

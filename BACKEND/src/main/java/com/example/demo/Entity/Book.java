@@ -26,6 +26,12 @@ public class Book {
     @Column(name = "genre", columnDefinition = "VARCHAR(255)")
     private String genre;
 
+    public Book(String title, String author, String genre) {
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+    }
+
     @ManyToMany
     private Set<User> ownersOfTheBook = new HashSet<>();
 

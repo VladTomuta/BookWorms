@@ -1,7 +1,9 @@
 package com.example.demo.Controller;
 
+import com.example.demo.DTO.AddBookDTO;
 import com.example.demo.DTO.BookDTO;
 import com.example.demo.Entity.Book;
+import com.example.demo.Entity.User;
 import com.example.demo.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/books")
+@CrossOrigin("http://localhost:3000")
 public class BookController {
     @Autowired
     private BookService bookService;
@@ -18,7 +21,14 @@ public class BookController {
     // this method must be changed in order to add a book it must be assigned to a user/customer
     // in order to do that I will assume that a user will add a book, not an independent book
     @PostMapping("/{id}/addBook")
-    public BookDTO addBook(@PathVariable int id, @RequestBody Book book){
+    public BookDTO addBook(@PathVariable int id, @RequestBody AddBookDTO addBookDTO){
+
+        Book book = new Book(
+                addBookDTO.title(),
+                addBookDTO.author(),
+                addBookDTO.genre()
+        );
+
         return bookService.addBook(id,book);
     }
 

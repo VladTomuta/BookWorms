@@ -11,7 +11,7 @@
     "react": "^18.2.0",
     "react-auth-kit": "^2.12.2",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.10.0",
+    "react-router-dom": "^6.11.0",
     "react-scripts": "5.0.1",
     "react-slideshow-image": "^4.2.1",
     "web-vitals": "^2.1.4"
