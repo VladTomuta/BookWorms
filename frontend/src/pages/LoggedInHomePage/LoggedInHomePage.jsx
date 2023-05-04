@@ -3,6 +3,8 @@ import './LoggedInHomePage.css'
 import ProfileSideBar from '../../components/Profile/ProfileSideBar'
 import bookCardImage from './images/image-book-card.jpg'
 import {useLocation} from 'react-router-dom';
+import UserContext from '../LogIn/UserContext/UserContext';
+import { useContext } from 'react';
 
 function LoggedInHomePage() {
 

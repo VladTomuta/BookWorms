@@ -3,22 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import YourSvg from "../../assets/logo_bookworms.svg";
 import "./LogInPage.css"
+import UserContext from './UserContext/UserContext';
+import { useContext } from 'react';
 
 function LogInPage() {
 
-  const [user, setUser] = useState(
-    {
-      email:"",
-      fullName:"",
-      username:"",
-      password:"",
-      phoneNumber:"",
-      region:""
-    }
-  );
-
-    const [email,setEmail] = useState("");
-    const [password,setPassword] = useState("");
+  const {addUser} = useContext(UserContext);
+  
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
 
     /*
     const [users, setUsers] = useState([]);
@@ -64,21 +57,17 @@ function LogInPage() {
         email: email,
         password: password,
         }).then((res) =>
-        {
-          console.log(res.data);
-        
+        {        
           if(res.data.status == true)
           {
             console.log(res.data.user.role);
+            addUser(res.data.user);
 
             if(res.data.user.role == "USER") {
-              //history.push("/loggedIn",res.data.user.user_id)
-              //navigate.push("/loggedIn", res.data.user.user_id)
-              navigate("/loggedIn", {state:{id:res.data.user.user_id}})
+              navigate("/loggedIn")
             } else {
               navigate("/admin")
             }
-              
           }
           else
           {

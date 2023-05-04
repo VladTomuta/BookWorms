@@ -7,19 +7,22 @@ import AddBookPage from "./pages/AddBook/AddBookPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React from "react";
 import LoggedInHomePage from "./pages/LoggedInHomePage/LoggedInHomePage";
+import { UserProvider } from "./pages/LogIn/UserContext/UserContext";
 
 function App() {
 	return (
-		<Router>
-			<Routes>
-				<Route path="/" element={<HomePage />} />
-				<Route path="/login" element={<LogInPage />} />
-				<Route path="/signup" element={<SignUp />} />
-				<Route path="/admin" element={<AdminPage />} />
-				<Route path="/loggedIn" element={<LoggedInHomePage />} />
-				<Route path="/addBook" element={<AddBookPage />} />
-			</Routes>
-		</Router>
+		<UserProvider>
+			<Router>
+				<Routes>
+					<Route path="/" element={<HomePage />} />
+					<Route path="/login" element={<LogInPage />} />
+					<Route path="/signup" element={<SignUp />} />
+					<Route path="/admin" element={<AdminPage />} />
+					<Route path="/loggedIn" element={<LoggedInHomePage />} />
+					<Route path="/addBook" element={<AddBookPage />} />
+				</Routes>
+			</Router>
+		</UserProvider>
 	);
 }
 

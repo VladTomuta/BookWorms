@@ -1,17 +1,24 @@
 import React from 'react'
 import './ProfileSideBar.css'
 import {useNavigate, useLocation} from 'react-router-dom'
+import UserContext from '../../pages/LogIn/UserContext/UserContext';
+import { useContext } from 'react';
+
+
 function ProfileSideBar() {
 
-    const location = useLocation();
-    const navigate = useNavigate();
-    const username = "Profile Picture"
+  const location = useLocation();
+  const navigate = useNavigate();
+  const username = "Profile Picture"
+
+  const {user} = useContext(UserContext);
+  
   return (
     <div className='Profile-Container'>
         <div className='profilePicture'>
-            <span id='profile-picture-placeholder'>{username}</span>
+            <span id='profile-picture-placeholder'>{user.username}</span>
         </div>
-        <span id='below-profilePic'>{username}</span>
+        <span id='below-profilePic'>{user.email}</span>
         <div className='profileButtonsContainer'>
           <div className='profile-button'>
               <span className='buttonTitle'>My Profile</span>
