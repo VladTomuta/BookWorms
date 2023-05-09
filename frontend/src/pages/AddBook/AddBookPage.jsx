@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React,{useState} from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from "axios";
 import YourSvg from "../../assets/logo_bookworms.svg";
@@ -6,7 +6,7 @@ import "./AddBookPage.css"
 
 function AddBookPage() {
 
-
+    const userObj = JSON.parse(sessionStorage.getItem('user'));
 
     const [book, setBook] = useState(
       {
@@ -37,16 +37,15 @@ function AddBookPage() {
     e.preventDefault()
     console.log(book)
 
-    const id = 40;
-
     try {
-      console.log(location.state.id)
-      await axios.post(`http://127.0.0.1:8080/books/${location.state.id}/addBook`, book)
+      console.log(userObj)
+      console.log(userObj.user_id)
+      await axios.post(`http://127.0.0.1:8080/books/${userObj.user_id}/addBook`, book)
       .then((res) =>
         {
           console.log(res.data);
 
-            navigate("/loggedIn", {state:{id:location.state.id}});
+            navigate("/loggedIn");
         
       }, fail => {
         console.error(fail); // Error!
@@ -59,6 +58,10 @@ function AddBookPage() {
 
   const navigateToHomePage = () => {
     navigate("/");
+  }
+
+  const navigateToLoggedInPage = () => {
+    navigate("/loggedIn");
   }
 
   return (
@@ -75,7 +78,7 @@ function AddBookPage() {
           
           <button className='signUpButton' onClick={handleOnAddBookButton}>Add Book</button>
           <div className='line'></div>
-          <button className='LogInViaFacebookButton' onClick={LogInViaFacebook}>Cancel</button>
+          <button className='LogInViaFacebookButton' onClick={navigateToLoggedInPage}>Cancel</button>
         </form>
       </div>
     </div>

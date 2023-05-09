@@ -1,5 +1,6 @@
 package com.example.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,17 +35,18 @@ public class User /*implements UserDetails*/ {
     @Column(name ="role", columnDefinition = "VARCHAR(255)")
     private String role;
 
-    @ManyToMany//(mappedBy = "ownersOfTheBook")
+    @ManyToMany
     @JoinTable(name = "user_book",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn( name =  "book_id"))
+    @JsonIgnoreProperties("ownersOfTheBook")
     private Set<Book> booksIOwn = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_user_id", referencedColumnName = "user_id")
     private List<ProfileReview> profileReviews;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_user_id", referencedColumnName = "user_id")
     private List<BookReview> bookReviews;
 
@@ -57,31 +59,4 @@ public class User /*implements UserDetails*/ {
         this.password = password;
         this.role = role;
     }
-
-        /*
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
-    */
 }
