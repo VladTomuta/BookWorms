@@ -84,22 +84,27 @@ function LogInPage() {
 
   return (
     <div className='logInFormContainer'>
-      <div className='logoContainer'>
-        <a href='#' onClick={navigateToHomePage}><img id="logo" src={YourSvg} alt="Your SVG" /></a>
-      </div>
-      <div className='FormContainer'>
-        <form className='logInForm'>
-          <span className='logintext'>Log In</span>
-          <input id='logInInput' type="text" placeholder='email or phone number' onChange={setEmailOnChange}></input>
-          <input id='logInInput' type="password" placeholder='password' onChange={setPasswordOnChange}></input>
-          <a href='/' className='forgotpasstext'>Forgot password?</a>
-          
-          <button className='button' onClick={handleOnSubmitButton}>Log In</button>
-          <div className='line'></div>
-          <button className='button' onClick={LogInViaFacebook}>Facebook</button>
-          <button className='button' onClick={LogInViaGoogle}>Google</button>
-          <span className='notAMemberText'>Not a member? <a href='./signup'>Sign Up</a></span>
-        </form>
+      <div className='middle-layer'>
+        <div className='logoContainer'>
+          <div className='containerOfTheLogo'>
+            <a href='#' onClick={navigateToHomePage}><img id="logo" src={YourSvg} alt="Your SVG" /></a>
+          </div>
+          <span id='page-description-login'>Welcome to our book switching application! With our platform, you can easily share books with others and discover new titles. Whether you're an avid reader or just starting out, our community is here to help you find your next favorite book. Login or sign up today to get started!</span>
+        </div>
+        <div className='FormContainer'>
+          <form className='logInForm'>
+            <span className='logintext'>Log In</span>
+            <input id='logInInput' type="text" placeholder='email or phone number' onChange={setEmailOnChange}></input>
+            <input id='logInInput' type="password" placeholder='password' onChange={setPasswordOnChange}></input>
+            <a href='/' className='forgotpasstext'>Forgot password?</a>
+            
+            <button className='button' onClick={handleOnSubmitButton}>Log In</button>
+            <div className='line'/>
+            <button className='button' onClick={LogInViaFacebook}>Facebook</button>
+            <button className='button' onClick={LogInViaGoogle}>Google</button>
+            <span className='notAMemberText'>Not a member? <a href='./signup'>Sign Up</a></span>
+          </form>
+        </div>
       </div>
     </div>
   )

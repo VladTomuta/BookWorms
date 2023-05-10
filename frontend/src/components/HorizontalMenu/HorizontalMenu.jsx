@@ -8,10 +8,10 @@ function HorizontalMenu() {
 
   return (
     <div className='horizontal-menu-container'>
-        <button className='button1' onClick={() => navigate("/books")}>Available Books</button>
-        <button className='button2' onClick={() => navigate("/aboutUs")}>About Us</button>
-        <button className='button3' onClick={() => navigate("/signup")}>Sign Up</button>
-        <button className='button4' onClick={() => navigate("/login")}>Login</button>
+        <button className='button-menu' onClick={() => navigate("/books")}>Available Books</button>
+        <button className='button-menu' onClick={() => navigate("/aboutUs")}>About Us</button>
+        <button className='button-menu' onClick={() => navigate("/signup")}>Sign Up</button>
+        <button className='button-menu' onClick={() => navigate("/login")}>Login</button>
     </div>
   )
 }

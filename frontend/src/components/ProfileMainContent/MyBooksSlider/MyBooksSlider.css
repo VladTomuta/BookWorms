@@ -1,0 +1,15 @@
+.MyBooksSliderContainer{
+    display: flex;
+    flex-direction: column;
+    margin: 50px 0px 15px 25px;
+}
+
+#MyBooksTitle{
+    font-size: 28px;
+    margin: 10px;
+
+}
+
+.BooksSlider{
+    display: flex;    
+}

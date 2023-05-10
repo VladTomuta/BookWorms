@@ -9,7 +9,6 @@ function ProfileSideBar() {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const username = "Profile Picture"
 
   const {user} = useContext(UserContext);
   

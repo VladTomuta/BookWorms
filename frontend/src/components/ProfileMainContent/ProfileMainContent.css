@@ -1,0 +1,7 @@
+.ProfileMainContentContainer{
+    background-color: #63766E;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: white;
+}
