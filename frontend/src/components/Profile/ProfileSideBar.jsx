@@ -1,23 +1,28 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import './ProfileSideBar.css'
-import {useNavigate, useLocation} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import UserContext from '../../pages/LogIn/UserContext/UserContext';
-import { useContext } from 'react';
+import {useContext} from 'react';
 
 
 function ProfileSideBar() {
 
-  const location = useLocation();
   const navigate = useNavigate();
 
   const {user} = useContext(UserContext);
+
+  const userObj = JSON.parse(sessionStorage.getItem('user'));
+
+  useEffect(() => {
+  }, [user]);
+
   
   return (
     <div className='Profile-Container'>
         <div className='profilePicture'>
-            <span id='profile-picture-placeholder'>{user.username}</span>
+            <span id='profile-picture-placeholder'>{userObj.username}</span>
         </div>
-        <span id='below-profilePic'>{user.email}</span>
+        <span id='below-profilePic'>{userObj.email}</span>
         <div className='profileButtonsContainer'>
           <div className='profile-button'>
               <span className='buttonTitle'>My Profile</span>
@@ -26,7 +31,7 @@ function ProfileSideBar() {
               <span className='buttonTitle'>Find Books</span>
           </div>
           <div className='profile-button'>
-              <span className='buttonTitle' onClick={() => navigate("/addBook", {state:{id:location.state.id}})}>Put a Book yourself</span>
+              <span className='buttonTitle' onClick={() => navigate("/addBook")}>Put a Book yourself</span>
           </div>
         </div>
         <div className='logOutContainer'>

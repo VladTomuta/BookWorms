@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React,{useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import YourSvg from "../../assets/logo_bookworms.svg";
@@ -62,6 +62,7 @@ function LogInPage() {
           {
             console.log(res.data.user.role);
             addUser(res.data.user);
+            sessionStorage.setItem('user', JSON.stringify(res.data.user));
 
             if(res.data.user.role == "USER") {
               navigate("/loggedIn")
@@ -78,7 +79,8 @@ function LogInPage() {
          });
     }
       catch (err) {
-      alert(err);
+        console.log("DA");
+        alert(err);
     }
   }
 
