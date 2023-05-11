@@ -10,19 +10,18 @@ function ProfileSideBar() {
   const navigate = useNavigate();
 
   const {user} = useContext(UserContext);
+  //const userObj = JSON.parse(sessionStorage.getItem('user'));
 
-  const userObj = JSON.parse(sessionStorage.getItem('user'));
-
-  useEffect(() => {
-  }, [user]);
+  //useEffect(() => {
+ //}, [user]);
 
   
   return (
     <div className='Profile-Container'>
         <div className='profilePicture'>
-            <span id='profile-picture-placeholder'>{userObj.username}</span>
+            <span id='profile-picture-placeholder'>{user.username}</span>
         </div>
-        <span id='below-profilePic'>{userObj.email}</span>
+        <span id='below-profilePic'>{user.email}</span>
         <div className='profileButtonsContainer'>
           <div className='profile-button'>
               <span className='buttonTitle'>My Profile</span>

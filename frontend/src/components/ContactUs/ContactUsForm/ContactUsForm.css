@@ -3,6 +3,7 @@
     padding: 15px 20px;
     margin: 10px 0px;
     
+    border-radius: 10px;
     border: none;
     outline: none;
 }
@@ -16,6 +17,8 @@
     padding: 15px 20px;
     margin: 10px 0px;
 
+
+    border-radius: 10px;
     border: none;
     outline: none;
 }
@@ -33,13 +36,13 @@
     margin: 25px 0px;
     width: 300px;
     height: 40px;
-    background-color: #E25822;
+    background-color: #aca881;
     outline: none;
     border: none;
 }
 
 #submitButton:hover{
-    background-color: #c44b1c;
+    background-color: #8b8866;
     cursor: pointer;
 }   
 

@@ -1,5 +1,5 @@
 .about-us-container{
-    background-color: #387AA2;
+    background-color: #81907c;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -77,9 +77,9 @@
 
 .separator{
     margin: 35px 0px;
-    width: 80%;
+    width: 90%;
     height: 3px;
-    background-color: #5dbbbe;
+    background-color: #657560;
     border-radius: 50px;
 }
 

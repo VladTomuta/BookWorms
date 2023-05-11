@@ -2,11 +2,14 @@ import React,{useState} from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from "axios";
 import YourSvg from "../../assets/logo_bookworms.svg";
-import "./AddBookPage.css"
+//import "./AddBookPage.css"
+import UserContext from '../../pages/LogIn/UserContext/UserContext';
+import {useContext} from 'react';
 
 function AddBookPage() {
 
-    const userObj = JSON.parse(sessionStorage.getItem('user'));
+//    const user = JSON.parse(sessionStorage.getItem('user'));
+    const {user} = useContext(UserContext);
 
     const [book, setBook] = useState(
       {
@@ -38,9 +41,9 @@ function AddBookPage() {
     console.log(book)
 
     try {
-      console.log(userObj)
-      console.log(userObj.user_id)
-      await axios.post(`http://127.0.0.1:8080/books/${userObj.user_id}/addBook`, book)
+      console.log(user);
+      console.log(user.user_id);
+      await axios.post(`http://127.0.0.1:8080/books/${user.user_id}/addBook`, book)
       .then((res) =>
         {
           console.log(res.data);

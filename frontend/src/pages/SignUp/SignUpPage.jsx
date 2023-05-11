@@ -99,27 +99,32 @@ function LogInPage() {
   }
 
   return (
-    <div className='PageContainer'>
-      <div className='logoContainer'>
-        <a  onClick={navigateToHomePage}><img id="SignUpPagelogo" src={YourSvg} alt="Your SVG" /></a>
-      </div>
-      <div className='signUpFormContainer'>
-        <form className='signUpForm'>
-          <span className='signUpText'>Sign Up</span>
-          <input id='signUpInput' type="text" placeholder='email' name='email' value={email} onChange={(e)=>onInputChange(e)}></input>
-          <input id='signUpInput' type="text" placeholder='full name' name='fullName' value={fullName} onChange={(e)=>onInputChange(e)}></input>
-          <input id='signUpInput' type="text" placeholder='username' name='username' value={username} onChange={(e)=>onInputChange(e)}></input>
-          <input id='signUpInput' type="password" placeholder='password' name='password' value={password} onChange={(e)=>onInputChange(e)}></input>
-          <input id='signUpInput' type="text" placeholder='phone number' name='phoneNumber' value={phoneNumber} onChange={(e)=>onInputChange(e)}></input>
-          <input id='signUpInput' type="text" placeholder='region' name='region' value={region} onChange={(e)=>onInputChange(e)}></input>
-          <a href='/' className='forgotpasstext'>Forgot password?</a>
-          
-          <button className='signUpButton' onClick={handleOnSubmitButton}>Sign Up</button>
-          <div className='line'></div>
-          <button className='LogInViaFacebookButton' onClick={LogInViaFacebook}>Facebook</button>
-          <button className='LogInViaGoogleButton' onClick={LogInViaGoogle}>Google</button>
-          <span className='SignUpAlreadyAMember'>Already a member? <a href='./login'>Log In</a></span>
-        </form>
+    <div className='SignUpPageContainer'>
+      <div className='middle-layer-signup'>
+        <div className='SignUpPage-logoContainer'>
+          <div className='logoInsideLogoContainer'>
+            <a  onClick={navigateToHomePage}><img id="SignUpPagelogo" src={YourSvg} alt="Your SVG" /></a>
+          </div>
+          <span id='page-description-signup'>Welcome to our book switching application! With our platform, you can easily share books with others and discover new titles. Whether you're an avid reader or just starting out, our community is here to help you find your next favorite book. Login or sign up today to get started!</span>
+        </div>
+        <div className='signUpFormContainer'>
+          <form className='signUpForm'>
+            <span className='signUpText'>Sign Up</span>
+            <input id='signUpInput' type="text" placeholder='email' name='email' value={email} onChange={(e)=>onInputChange(e)}></input>
+            <input id='signUpInput' type="text" placeholder='full name' name='fullName' value={fullName} onChange={(e)=>onInputChange(e)}></input>
+            <input id='signUpInput' type="text" placeholder='username' name='username' value={username} onChange={(e)=>onInputChange(e)}></input>
+            <input id='signUpInput' type="password" placeholder='password' name='password' value={password} onChange={(e)=>onInputChange(e)}></input>
+            <input id='signUpInput' type="text" placeholder='phone number' name='phoneNumber' value={phoneNumber} onChange={(e)=>onInputChange(e)}></input>
+            <input id='signUpInput' type="text" placeholder='region' name='region' value={region} onChange={(e)=>onInputChange(e)}></input>
+            <a href='/' className='signUpForgotPassText'>Forgot password?</a>
+            
+            <button className='signUpButton' onClick={handleOnSubmitButton}>Sign Up</button>
+            <div className='line'></div>
+            <button className='LogInViaFacebookButton' onClick={LogInViaFacebook}>Facebook</button>
+            <button className='LogInViaGoogleButton' onClick={LogInViaGoogle}>Google</button>
+            <span className='SignUpAlreadyAMember'>Already a member? <a href='./login'>Log In</a></span>
+          </form>
+        </div>
       </div>
     </div>
   )
