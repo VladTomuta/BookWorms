@@ -11,6 +11,8 @@ import com.example.demo.Exception.IncorrectIdException;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Response.LoginResponse;
 import com.example.demo.Response.SignupResponse;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
+@NoArgsConstructor
 public class UserService {
 
     @Autowired
@@ -30,10 +33,14 @@ public class UserService {
     @Autowired
     private BookDTOMapper bookDTOMapper;
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
     private UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public UserService(UserRepository userRepository, UserDTOMapper userDTOMapper) {
+        this.userRepository = userRepository;
+        this.userDTOMapper = userDTOMapper;
+    }
 
     public UserDTO addUser(User user){
         return userDTOMapper.apply(userRepository.saveAndFlush(user));
