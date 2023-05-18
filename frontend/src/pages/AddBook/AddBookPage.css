@@ -1,0 +1,78 @@
+.AddBookPageContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-color: #f0ece1;
+}
+
+.addBookLogoContainer{
+    background-color: #0f2a2e;
+    border-radius: 25px 0px 0px 25px;
+    width: 350px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#AddBookLogo{
+    width: 300px;
+    height: 300px;
+    margin: 55px;
+    border-radius: 100%;
+    cursor: pointer;
+    align-self: center;
+}
+
+.addBookFormContainer{
+    background-color: #81907c;
+    width: 650px;
+    height: 600px;
+}
+
+.addBookForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.addBookText{
+    color: white;
+    font-size: 34px;
+    font-weight: bold;
+    margin: 25px 0px;
+}
+
+#addBookInput{
+    border: 3px solid white;
+    border-radius: 4px;
+
+    padding: 10px 15px;
+    margin: 15px 0px 15px 30px;
+
+    outline: none;
+
+    width: 350px;
+    height: auto;
+
+}
+
+.addBookButton, .CancelButton{
+    padding: 15px 30px;
+    width: 300px;
+    margin: 15px 60px 15px 60px;
+    color: white;
+    background-color: #0f2a2e ;
+
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.addBookButton:hover, .CancelButton:hover{
+    background-color: #174248 ;
+}
+

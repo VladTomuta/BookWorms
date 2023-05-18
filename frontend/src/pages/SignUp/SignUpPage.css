@@ -63,22 +63,24 @@
 }
 
 #signUpInput{
-    padding: 15px 20px;
-    margin: 5px 25px;
+    border: 3px solid white;
     border-radius: 4px;
 
-    width: 350px;
+    padding: 10px 15px;
+    margin: 15px 0px 15px 30px;
 
     outline: none;
-    border: none;
-    align-self: center;
+
+    width: 350px;
+    height: auto;
+
+    align-self: flex-start;
 }
 
 #signUpInput:focus{
+    border-bottom: 3px solid #0f2a2e ;
+    padding: 10px 15px;
     outline: none;
-    border: none;
-    border-bottom: 3px solid #E25822 ;
-    padding: 15px 20px;
 }
 
 .line{

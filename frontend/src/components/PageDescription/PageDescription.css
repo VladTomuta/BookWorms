@@ -2,11 +2,12 @@
     display: flex;
     flex-direction: row;
     padding: 100px 100px 100px 100px;
-    background-color: #63766e;
+    background-color: #f9f7f3;
 }
 #booksImage{
     width: 500px;
     height: 500px;
+    border-radius: 25px;
 }
 
 .text-container{
