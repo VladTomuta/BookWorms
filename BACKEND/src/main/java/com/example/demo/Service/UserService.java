@@ -74,8 +74,7 @@ public class UserService {
             userRepository.deleteById(id);
             return new ResponseEntity<String>("Sucsessfully deleted!", HttpStatus.OK);
         }
-
-        return new ResponseEntity<String>("Can't find specified book!", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<String>("Can't find specified user!", HttpStatus.NOT_FOUND);
     }
 
     public SignupResponse signupUser(SignupDTO signupDTO) {
