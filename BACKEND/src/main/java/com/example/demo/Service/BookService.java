@@ -13,7 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
@@ -71,6 +73,29 @@ public class BookService {
                 .stream()
                 .map(bookDTOMapper)
                 .collect(Collectors.toSet());
+    }
+
+    public Set<BookDTO> getAllBooksNotOwned(int userId) {
+
+
+        Optional<User> user = userRepository.findById(userId);
+
+        if(user.isPresent())
+        {
+            Set<BookDTO> ownerBooks = user.get().getBooksIOwn()
+                                     .stream()
+                                     .map(bookDTOMapper)
+                                     .collect(Collectors.toSet());
+
+            Set<BookDTO> books = bookRepository.findAll()
+                                .stream()
+                                .map(bookDTOMapper)
+                                .filter(Predicate.not(ownerBooks::contains))
+                                .collect(Collectors.toSet());
+            
+            return books;
+        }
+        throw new IncorrectIdException();
     }
 
     public BookDTO updateBook(int id, Book book) {

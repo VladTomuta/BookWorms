@@ -53,4 +53,6 @@ public class BookController {
         return bookService.getAllBooks();
     }
 
+    @GetMapping("/getAllBooksNotOwned/{id}")
+    public Set<BookDTO> getAllBooksNotOwned(@PathVariable int id) {return bookService.getAllBooksNotOwned(id);}
 }
