@@ -57,7 +57,7 @@ public class UserController {
         return userService.deleteUser(id);
     }
 
-    @GetMapping("/{id}/booksOwned")
+    @GetMapping("/booksOwned/{id}")
     public Set<BookDTO> getBooksOwnedById(@PathVariable int id){
         return userService.getBooksOwnedById(id);
     }

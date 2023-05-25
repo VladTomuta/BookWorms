@@ -20,7 +20,7 @@ public class BookController {
 
     // this method must be changed in order to add a book it must be assigned to a user/customer
     // in order to do that I will assume that a user will add a book, not an independent book
-    @PostMapping("/{id}/addBook")
+    @PostMapping("/addBook/{id}")
     public BookDTO addBook(@PathVariable int id, @RequestBody AddBookDTO addBookDTO){
 
         Book book = new Book(
