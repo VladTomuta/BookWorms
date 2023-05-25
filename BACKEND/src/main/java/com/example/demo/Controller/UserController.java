@@ -4,6 +4,7 @@ import com.example.demo.DTO.BookDTO;
 import com.example.demo.DTO.LoginDTO;
 import com.example.demo.DTO.SignupDTO;
 import com.example.demo.DTO.UserDTO;
+import com.example.demo.DTO.FullUserDTO;
 import com.example.demo.Entity.User;
 import com.example.demo.Response.LoginResponse;
 import com.example.demo.Response.SignupResponse;
@@ -26,7 +27,7 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/addUser")
-    public UserDTO addUser(@RequestBody SignupDTO signupDTO){
+    public FullUserDTO addUser(@RequestBody SignupDTO signupDTO){
 
         User user = new User(
                 signupDTO.username(),
@@ -72,4 +73,7 @@ public class UserController {
         SignupResponse signupResponse = userService.signupUser(signupDTO);
         return ResponseEntity.ok(signupResponse);
     }
+
+    @GetMapping("/getAllBooksNotOwned/{id}")
+    public Set<BookDTO> getAllBooksNotOwned(@PathVariable int id) {return userService.getAllBooksNotOwned(id);}
 }

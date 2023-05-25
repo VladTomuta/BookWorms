@@ -1,18 +1,16 @@
 package com.example.demo.Service;
 
-import com.example.demo.DTO.BookDTO;
-import com.example.demo.DTO.LoginDTO;
-import com.example.demo.DTO.SignupDTO;
-import com.example.demo.DTO.UserDTO;
+import com.example.demo.DTO.*;
 import com.example.demo.DTOMapper.BookDTOMapper;
+import com.example.demo.DTOMapper.FullUserDTOMapper;
 import com.example.demo.DTOMapper.UserDTOMapper;
 import com.example.demo.Entity.User;
 import com.example.demo.Exception.IncorrectIdException;
+import com.example.demo.Repository.BookRepository;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Response.LoginResponse;
 import com.example.demo.Response.SignupResponse;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +18,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -29,22 +29,26 @@ import java.util.stream.Collectors;
 public class UserService {
 
     @Autowired
+    private FullUserDTOMapper fullUserDTOMapper;
+    @Autowired
     private UserDTOMapper userDTOMapper;
     @Autowired
     private BookDTOMapper bookDTOMapper;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BookRepository bookRepository;
 
-    public UserService(UserRepository userRepository, UserDTOMapper userDTOMapper) {
+    public UserService(UserRepository userRepository, FullUserDTOMapper fullUserDTOMapper, UserDTOMapper userDTOMapper) {
         this.userRepository = userRepository;
+        this.fullUserDTOMapper = fullUserDTOMapper;
         this.userDTOMapper = userDTOMapper;
     }
 
-    public UserDTO addUser(User user){
-        return userDTOMapper.apply(userRepository.saveAndFlush(user));
+    public FullUserDTO addUser(User user){
+        return fullUserDTOMapper.apply(userRepository.saveAndFlush(user));
     }
 
     public UserDTO getUser(int id)  {
@@ -65,7 +69,33 @@ public class UserService {
     public Set<BookDTO> getBooksOwnedById(int id) {
         if(userRepository.findById(id).isPresent()){
             User actualUser = userRepository.findById(id).get();
-            return actualUser.getBooksIOwn().stream().map(bookDTOMapper).collect(Collectors.toSet());
+            return actualUser.getBooksIOwn()
+                             .stream()
+                             .map(bookDTOMapper)
+                             .collect(Collectors.toSet());
+        }
+        throw new IncorrectIdException();
+    }
+
+    public Set<BookDTO> getAllBooksNotOwned(int userId) {
+
+
+        Optional<User> user = userRepository.findById(userId);
+
+        if(user.isPresent())
+        {
+            Set<BookDTO> ownerBooks = user.get().getBooksIOwn()
+                    .stream()
+                    .map(bookDTOMapper)
+                    .collect(Collectors.toSet());
+
+            Set<BookDTO> books = bookRepository.findAll()
+                    .stream()
+                    .map(bookDTOMapper)
+                    .filter(Predicate.not(ownerBooks::contains))
+                    .collect(Collectors.toSet());
+
+            return books;
         }
         throw new IncorrectIdException();
     }

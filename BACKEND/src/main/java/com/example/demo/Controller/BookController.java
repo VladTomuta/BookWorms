@@ -2,8 +2,8 @@ package com.example.demo.Controller;
 
 import com.example.demo.DTO.AddBookDTO;
 import com.example.demo.DTO.BookDTO;
+import com.example.demo.DTO.UserDTO;
 import com.example.demo.Entity.Book;
-import com.example.demo.Entity.User;
 import com.example.demo.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -53,6 +53,6 @@ public class BookController {
         return bookService.getAllBooks();
     }
 
-    @GetMapping("/getAllBooksNotOwned/{id}")
-    public Set<BookDTO> getAllBooksNotOwned(@PathVariable int id) {return bookService.getAllBooksNotOwned(id);}
+    @GetMapping("getAllOwnersOfBook/{id}")
+    public Set<UserDTO> getAllOwnersOfBook(@PathVariable int id){return bookService.getAllOwnersOfBook(id);}
 }

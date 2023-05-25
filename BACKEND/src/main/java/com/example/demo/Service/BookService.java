@@ -1,7 +1,9 @@
 package com.example.demo.Service;
 
 import com.example.demo.DTO.BookDTO;
+import com.example.demo.DTO.UserDTO;
 import com.example.demo.DTOMapper.BookDTOMapper;
+import com.example.demo.DTOMapper.UserDTOMapper;
 import com.example.demo.Entity.Book;
 import com.example.demo.Entity.User;
 import com.example.demo.Exception.IncorrectIdException;
@@ -15,7 +17,6 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,6 +29,8 @@ public class BookService {
 
     @Autowired
     private BookDTOMapper bookDTOMapper;
+    @Autowired
+    private UserDTOMapper userDTOMapper;
 
     public BookDTO addBook(int id, Book book){
 
@@ -75,25 +78,14 @@ public class BookService {
                 .collect(Collectors.toSet());
     }
 
-    public Set<BookDTO> getAllBooksNotOwned(int userId) {
+    public Set<UserDTO> getAllOwnersOfBook(int bookId) {
+        Optional<Book> book = bookRepository.findById(bookId);
 
-
-        Optional<User> user = userRepository.findById(userId);
-
-        if(user.isPresent())
-        {
-            Set<BookDTO> ownerBooks = user.get().getBooksIOwn()
-                                     .stream()
-                                     .map(bookDTOMapper)
-                                     .collect(Collectors.toSet());
-
-            Set<BookDTO> books = bookRepository.findAll()
-                                .stream()
-                                .map(bookDTOMapper)
-                                .filter(Predicate.not(ownerBooks::contains))
-                                .collect(Collectors.toSet());
-            
-            return books;
+        if(book.isPresent()) {
+            return book.get().getOwnersOfTheBook()
+                    .stream()
+                    .map(userDTOMapper)
+                    .collect(Collectors.toSet());
         }
         throw new IncorrectIdException();
     }

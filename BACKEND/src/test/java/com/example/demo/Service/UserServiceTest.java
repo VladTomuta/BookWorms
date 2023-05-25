@@ -1,18 +1,14 @@
 package com.example.demo.Service;
 
+import com.example.demo.DTOMapper.FullUserDTOMapper;
 import com.example.demo.DTOMapper.UserDTOMapper;
 import com.example.demo.Entity.User;
 import com.example.demo.Repository.UserRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import org.aspectj.lang.annotation.After;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -30,6 +25,8 @@ class UserServiceTest {
     @Mock
     private UserRepository userRepository;
     @Mock
+    private FullUserDTOMapper fullUserDTOMapper;
+    @Mock
     private UserDTOMapper userDTOMapper;
     private UserService userService;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -37,7 +34,7 @@ class UserServiceTest {
 
     @BeforeEach
     void setUp() {
-        userService = new UserService(userRepository, userDTOMapper);
+        userService = new UserService(userRepository, fullUserDTOMapper, userDTOMapper);
     }
 
 

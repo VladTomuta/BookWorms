@@ -26,4 +26,6 @@ public class Rent {
     private LocalDate date_of_rental;
     @Column(name = "date_of_return", columnDefinition = "DATE")
     private LocalDate date_of_return;
+    @Column(name = "status", columnDefinition = "VARCHAR(255)")
+    private String status;
 }
