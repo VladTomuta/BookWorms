@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 @RestController
@@ -18,19 +20,46 @@ public class RentController {
     private RentService rentService;
 
     @PostMapping("/addRent")
-    public RentDTO addBook(@RequestBody Rent rent){
+    public RentDTO addRent(@RequestBody RentDTO rentDTO){
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        Rent rent = new Rent(
+                rentDTO.rentedById(),
+                rentDTO.renterId(),
+                rentDTO.bookId(),
+                LocalDate.parse(rentDTO.dateOfRental(), formatter),
+                LocalDate.parse(rentDTO.dateOfReturn(), formatter),
+                "REQUEST"
+        );
+
         return rentService.addRent(rent);
     }
-
     @GetMapping("/getRent/{id}")
     public RentDTO getRent(@PathVariable int id){
         return rentService.getRent(id);
     }
 
     @PutMapping("/updateRent/{id}")
-    public RentDTO updateRent(@PathVariable int id, @RequestBody Rent rent){
-        return rentService.updateRent(id, rent);
+    public RentDTO updateRent(@PathVariable int id, @RequestBody RentDTO rentDTO){
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        Rent newRent = new Rent(
+                rentDTO.rentId(),
+                rentDTO.rentedById(),
+                rentDTO.renterId(),
+                rentDTO.bookId(),
+                LocalDate.parse(rentDTO.dateOfRental(), formatter),
+                LocalDate.parse(rentDTO.dateOfReturn(), formatter),
+                rentDTO.status()
+        );
+
+        return rentService.updateRent(id, newRent);
     }
+
+    @PutMapping("/checkAndUpdateRentsThatArePastDue")
+    public Set<RentDTO> checkAndUpdateRentsThatArePastDue() {return rentService.checkAndUpdateRentsThatArePastDue();}
 
     @DeleteMapping("/deleteRent/{id}")
     public ResponseEntity<String> deleteRent(@PathVariable int id){
@@ -42,4 +71,10 @@ public class RentController {
     public Set<RentDTO> getAllRents(){
         return rentService.getAllRents();
     }
+
+    @GetMapping("/getAllRentsWhereUserIsRenter/{id}")
+    public Set<RentDTO> getAllRentsWhereUserIsRenter(@PathVariable int id) {return rentService.getAllRentsWhereUserIsRenter(id);}
+
+    @GetMapping("/getAllRentsRentedByUser/{id}")
+    public Set<RentDTO> getAllRentsRentedByUser(@PathVariable int id) {return rentService.getAllRentsRentedByUser(id);}
 }

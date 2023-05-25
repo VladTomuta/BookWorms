@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -41,28 +43,51 @@ public class RentService {
                 .collect(Collectors.toSet());
     }
 
+    public Set<RentDTO> getAllRentsWhereUserIsRenter(int id) {
+
+        System.out.println(id);
+
+        return  rentRepository.findAll()
+                .stream()
+                .map(rentDTOMapper)
+                .filter(rentDTO -> rentDTO.renterId() == id)
+                .collect(Collectors.toSet());
+    }
+
+    public Set<RentDTO> getAllRentsRentedByUser(int id) {
+        return  rentRepository.findAll()
+                .stream()
+                .map(rentDTOMapper)
+                .filter(rentDTO -> rentDTO.rentedById() == id)
+                .collect(Collectors.toSet());
+    }
+
     public RentDTO updateRent(int id, Rent rent) {
         if(rentRepository.findById(id).isPresent()) {
             Rent actualRent = rentRepository.findById(id).get();
 
-            if(rent.getRenter_id() != 0){
-                actualRent.setRenter_id(rent.getRenter_id());
+            if(rent.getRenterId() != 0){
+                actualRent.setRenterId(rent.getRenterId());
             }
 
-            if(rent.getRented_by_id() != 0) {
-                actualRent.setRented_by_id(rent.getRented_by_id());
+            if(rent.getRentedById() != 0) {
+                actualRent.setRentedById(rent.getRentedById());
             }
 
-            if(rent.getBook_id() != 0) {
-                actualRent.setBook_id(rent.getBook_id());
+            if(rent.getBookId() != 0) {
+                actualRent.setBookId(rent.getBookId());
             }
 
-            if(rent.getDate_of_rental() != null) {
-                actualRent.setDate_of_rental(rent.getDate_of_rental());
+            if(rent.getDateOfRental() != null) {
+                actualRent.setDateOfRental(rent.getDateOfRental());
             }
 
-            if(rent.getDate_of_return() != null) {
-                actualRent.setDate_of_return(rent.getDate_of_return());
+            if(rent.getDateOfReturn() != null) {
+                actualRent.setDateOfReturn(rent.getDateOfReturn());
+            }
+
+            if(rent.getStatus() != null) {
+                actualRent.setStatus(rent.getStatus());
             }
 
             return rentDTOMapper.apply(rentRepository.saveAndFlush(actualRent));
@@ -78,5 +103,45 @@ public class RentService {
         }
 
         return new ResponseEntity<String>("Can't find specified rent!", HttpStatus.NOT_FOUND);
+    }
+
+    public Set<RentDTO> checkAndUpdateRentsThatArePastDue() {
+        Set<RentDTO> rents = rentRepository.findAll()
+                                           .stream()
+                                           .map(rentDTOMapper)
+                                           .collect(Collectors.toSet());
+
+        LocalDate currentDate = LocalDate.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        for (RentDTO rentDTO : rents) {
+
+            if (LocalDate.parse(rentDTO.dateOfReturn(), formatter).isBefore(currentDate)) {
+
+                Rent newRent = new Rent(
+                        rentDTO.rentId(),
+                        0,
+                        0,
+                        0,
+                        null,
+                        null,
+                        rentDTO.status()
+                );
+
+                switch (newRent.getStatus()) {
+                    case "REQUEST" -> {
+                        newRent.setStatus("DENIED");
+                        updateRent(newRent.getRentId(), newRent);
+                    }
+                    case "ONGOING" -> {
+                        newRent.setStatus("PAST DUE DATE");
+                        updateRent(newRent.getRentId(), newRent);
+                    }
+                }
+            }
+        }
+
+        return rents;
     }
 }

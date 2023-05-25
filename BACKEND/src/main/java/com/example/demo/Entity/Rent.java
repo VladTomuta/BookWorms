@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "rent")
@@ -15,17 +16,26 @@ public class Rent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int rent_id;
-    @Column(name = "renter_by_id", columnDefinition = "INTEGER")
-    private int rented_by_id;
+    private int rentId;
+    @Column(name = "rented_by_id", columnDefinition = "INTEGER")
+    private int rentedById;
     @Column(name = "renter_id", columnDefinition = "INTEGER")
-    private int renter_id;
+    private int renterId;
     @Column(name = "book_id", columnDefinition = "INTEGER")
-    private int book_id;
+    private int bookId;
     @Column(name = "date_of_rental", columnDefinition = "DATE")
-    private LocalDate date_of_rental;
+    private LocalDate dateOfRental;
     @Column(name = "date_of_return", columnDefinition = "DATE")
-    private LocalDate date_of_return;
+    private LocalDate dateOfReturn;
     @Column(name = "status", columnDefinition = "VARCHAR(255)")
     private String status;
+
+    public Rent(int rentedById, int renterId, int bookId, LocalDate dateOfRental, LocalDate dateOfReturn, String status) {
+        this.rentedById = rentedById;
+        this.renterId = renterId;
+        this.bookId = bookId;
+        this.dateOfRental = dateOfRental;
+        this.dateOfReturn = dateOfReturn;
+        this.status = status;
+    }
 }
