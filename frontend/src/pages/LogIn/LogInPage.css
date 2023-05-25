@@ -20,7 +20,7 @@
     justify-content: center;
     border-radius: 25px;
     width: 1400px;
-    height: 900px;
+    height: 100%;
 
 }
 
@@ -51,11 +51,11 @@
     border-radius: 4px;
 
     padding: 10px 15px;
-    margin: 15px 0px 15px 30px;
+    margin: 10px;
 
     outline: none;
 
-    width: 350px;
+    width: 300px;
     height: auto;
 
     align-self: flex-start;
@@ -68,10 +68,10 @@
 }
 
 .line{
-    width: 400px;
+    width: 90%;
     height: 3px;
     background-color: #81907C ;
-    border-radius: 100%;
+    border-radius: 50px;
 }
 
 a{
@@ -109,7 +109,7 @@ a:hover{
 .button{
     padding: 15px 30px;
     width: 300px;
-    margin: 15px 60px 15px 60px;
+    margin: 15px;
     color: white;
     background-color: #0f2a2e ;
 
@@ -125,7 +125,7 @@ a:hover{
 .notAMemberText{
     align-self: flex-start;
     
-    margin: 15px 0px 0px 30px;
+    margin: 15px 0px 0px 20px;
 }
 
 #logo{    
@@ -149,7 +149,7 @@ a:hover{
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 900px;
+    height: 100%;
     border-radius: 25px 0px 0px 25px;
 
     background-color: #0f2a2e;
@@ -161,6 +161,6 @@ a:hover{
     
     
     font-size: 20px;
-    padding: 150px 50px;
+    padding: 60px 50px;
     border-radius: 25px;
 }
