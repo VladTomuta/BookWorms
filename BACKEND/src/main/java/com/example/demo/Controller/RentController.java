@@ -66,7 +66,6 @@ public class RentController {
         return rentService.deleteRent(id);
     }
 
-
     @GetMapping("/getAllRents")
     public Set<RentDTO> getAllRents(){
         return rentService.getAllRents();

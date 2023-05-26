@@ -11,8 +11,6 @@ import java.util.function.Function;
 public class RentDTOMapper implements Function<Rent, RentDTO> {
     @Override
     public RentDTO apply(Rent rent) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
         return new RentDTO(
                 rent.getRentId(),
                 rent.getRentedById(),
