@@ -105,7 +105,7 @@ public class BookService {
             return bookDTOMapper.apply(bookRepository.saveAndFlush(book));
         }
         //return some exception.
-        return bookDTOMapper.apply(book);
+        throw new IncorrectIdException();
     }
 
     public ResponseEntity<String> deleteBook(int id) {
