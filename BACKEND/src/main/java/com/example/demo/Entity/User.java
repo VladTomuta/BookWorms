@@ -45,8 +45,7 @@ public class User /*implements UserDetails*/ {
     @OneToMany(mappedBy = "written_by_id", cascade = CascadeType.ALL)
     private List<ProfileReview> profileReviews;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_user_id", referencedColumnName = "user_id")
+    @OneToMany(mappedBy = "written_by_id", cascade = CascadeType.ALL)
     private List<BookReview> bookReviews;
 
     public User(String username, String fullName, String region, String phoneNumber, String email, String password, String role) {

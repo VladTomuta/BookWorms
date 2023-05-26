@@ -1,10 +1,12 @@
 package com.example.demo.Service;
 
 import com.example.demo.DTO.BookReviewDTO;
+import com.example.demo.DTO.ProfileReviewDTO;
 import com.example.demo.DTOMapper.BookReviewDTOMapper;
 import com.example.demo.Entity.BookReview;
 import com.example.demo.Exception.IncorrectIdException;
 import com.example.demo.Repository.BookReviewRepository;
+import com.example.demo.Response.RatingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +32,40 @@ public class BookReviewService {
                 .findAny()
                 .map(bookReviewDTOMapper)
                 .orElseThrow(IncorrectIdException::new);
+    }
+
+    public Set<BookReviewDTO> getAllBookReviewsForBook(int id) {
+        return bookReviewRepository.findAll()
+                .stream()
+                .map(bookReviewDTOMapper)
+                .filter(bookReviewDTO -> bookReviewDTO.addressed_to_id() == id)
+                .collect(Collectors.toSet());
+    }
+
+    public Set<BookReviewDTO> getAllBookReviewsWrittenByUser(int id) {
+        return bookReviewRepository.findAll()
+                .stream()
+                .map(bookReviewDTOMapper)
+                .filter(bookReviewDTO -> bookReviewDTO.written_by_id() == id)
+                .collect(Collectors.toSet());
+    }
+
+    public RatingResponse getAverageRatingForBook(int id) {
+        Set<BookReviewDTO> bookReviewDTOs = getAllBookReviewsForBook(id);
+
+        int nr = 0;
+        float sum = 0;
+
+        for(BookReviewDTO bookReviewDTO : bookReviewDTOs) {
+            nr++;
+            sum += bookReviewDTO.rating();
+        }
+
+        if (nr != 0) {
+            return new RatingResponse(sum/nr, nr);
+        } else {
+            return new RatingResponse(0, 0);
+        }
     }
 
     public Set<BookReviewDTO> getAllBookReviews() {
