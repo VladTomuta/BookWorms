@@ -16,6 +16,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/bookReviews")
+@CrossOrigin("http://localhost:3000")
 public class BookReviewController {
     @Autowired
     private BookReviewService bookReviewService;

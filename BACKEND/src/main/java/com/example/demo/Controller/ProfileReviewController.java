@@ -15,6 +15,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/profileReviews")
+@CrossOrigin("http://localhost:3000")
 public class ProfileReviewController {
     @Autowired
     private ProfileReviewService profileReviewService;

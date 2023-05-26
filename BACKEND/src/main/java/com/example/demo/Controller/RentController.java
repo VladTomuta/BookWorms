@@ -13,7 +13,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/rents")
-
+@CrossOrigin("http://localhost:3000")
 public class RentController {
 
     @Autowired
