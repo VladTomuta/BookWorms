@@ -10,6 +10,7 @@ public record RentDTO(
         Integer renter_id,
         Integer book_id,
         LocalDate date_of_rental,
-        LocalDate date_of_return
+        LocalDate date_of_return,
+        String status
 ) {
 }

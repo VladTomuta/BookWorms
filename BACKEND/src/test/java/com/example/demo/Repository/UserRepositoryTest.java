@@ -16,7 +16,6 @@ class UserRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
-    //@Autowired
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @AfterEach

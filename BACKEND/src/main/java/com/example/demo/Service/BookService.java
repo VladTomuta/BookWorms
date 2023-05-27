@@ -1,7 +1,9 @@
 package com.example.demo.Service;
 
 import com.example.demo.DTO.BookDTO;
+import com.example.demo.DTO.UserDTO;
 import com.example.demo.DTOMapper.BookDTOMapper;
+import com.example.demo.DTOMapper.UserDTOMapper;
 import com.example.demo.Entity.Book;
 import com.example.demo.Entity.User;
 import com.example.demo.Exception.IncorrectIdException;
@@ -13,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,6 +29,8 @@ public class BookService {
 
     @Autowired
     private BookDTOMapper bookDTOMapper;
+    @Autowired
+    private UserDTOMapper userDTOMapper;
 
     public BookDTO addBook(int id, Book book){
 
@@ -71,6 +76,18 @@ public class BookService {
                 .stream()
                 .map(bookDTOMapper)
                 .collect(Collectors.toSet());
+    }
+
+    public Set<UserDTO> getAllOwnersOfBook(int bookId) {
+        Optional<Book> book = bookRepository.findById(bookId);
+
+        if(book.isPresent()) {
+            return book.get().getOwnersOfTheBook()
+                    .stream()
+                    .map(userDTOMapper)
+                    .collect(Collectors.toSet());
+        }
+        throw new IncorrectIdException();
     }
 
     public BookDTO updateBook(int id, Book book) {

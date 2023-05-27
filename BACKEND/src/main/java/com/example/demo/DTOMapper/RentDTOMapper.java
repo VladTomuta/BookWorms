@@ -17,7 +17,8 @@ public class RentDTOMapper implements Function<Rent, RentDTO> {
                 rent.getRenter_id(),
                 rent.getBook_id(),
                 rent.getDate_of_rental(),
-                rent.getDate_of_return()
+                rent.getDate_of_return(),
+                rent.getStatus()
         );
     }
 }
