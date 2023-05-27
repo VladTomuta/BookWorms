@@ -128,6 +128,14 @@ public class UserService {
         throw new IncorrectIdException();
     }
 
+    public Role getRoleOfUser(int id) {
+        Optional<User> user = userRepository.findById(id);
+        if(user.isPresent()) {
+            return user.get().getRole();
+        }
+        throw new IncorrectIdException();
+    }
+
     public ResponseEntity<String> deleteUser(int id) {
         if(userRepository.findById(id).isPresent()){
             userRepository.deleteById(id);

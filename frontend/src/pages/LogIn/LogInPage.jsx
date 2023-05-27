@@ -60,6 +60,7 @@ function LogInPage() {
         {        
           if(res.data.status == true)
           {
+            //asta ii tokenul pe care trebuie sa il salvezi local pentru fiecare api in afara de users/signup si users/login
             console.log(res.data.token);
             addUser(res.data.user);
             sessionStorage.setItem('user', JSON.stringify(res.data.user));

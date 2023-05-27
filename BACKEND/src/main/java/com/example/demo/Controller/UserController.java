@@ -105,4 +105,8 @@ public class UserController {
     @Operation(summary = "Get all books not owned by a user")
     @GetMapping("/getAllBooksNotOwned/{id}")
     public Set<BookDTO> getAllBooksNotOwned(@PathVariable int id) {return userService.getAllBooksNotOwned(id);}
+
+    @Operation(summary = "Get role of user (in order to check if the user is allowed on that url or not)")
+    @GetMapping("/getRoleOfUser/{id}")
+    public Role getRoleOfUser(@PathVariable int id) {return userService.getRoleOfUser(id);}
 }
