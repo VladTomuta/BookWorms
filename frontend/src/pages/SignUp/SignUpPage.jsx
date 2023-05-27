@@ -103,7 +103,7 @@ function LogInPage() {
       <div className='middle-layer-signup'>
         <div className='SignUpPage-logoContainer'>
           <div className='logoInsideLogoContainer'>
-            <a  onClick={navigateToHomePage}><img id="SignUpPagelogo" src={YourSvg} alt="Your SVG" /></a>
+          <img onClick={navigateToHomePage} id="SignUpPagelogo" src={YourSvg} alt="Your SVG" />
           </div>
           <span id='page-description-signup'>Welcome to our book switching application! With our platform, you can easily share books with others and discover new titles. Whether you're an avid reader or just starting out, our community is here to help you find your next favorite book. Login or sign up today to get started!</span>
         </div>

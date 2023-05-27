@@ -39,6 +39,7 @@ public class UserService {
     private BookDTOMapper bookDTOMapper;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
