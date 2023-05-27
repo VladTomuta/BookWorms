@@ -5,6 +5,7 @@ import com.example.demo.DTOMapper.ProfileReviewDTOMapper;
 import com.example.demo.Entity.ProfileReview;
 import com.example.demo.Exception.IncorrectIdException;
 import com.example.demo.Repository.ProfileReviewRepository;
+import com.example.demo.Response.RatingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,40 @@ public class ProfileReviewService {
                 .findAny()
                 .map(profileReviewDTOMapper)
                 .orElseThrow(IncorrectIdException::new);
+    }
+
+    public Set<ProfileReviewDTO> getAllProfileReviewsForUser(int id) {
+        return profileReviewRepository.findAll()
+                .stream()
+                .map(profileReviewDTOMapper)
+                .filter(profileReviewDTO -> profileReviewDTO.addressed_to_id() == id)
+                .collect(Collectors.toSet());
+    }
+
+    public Set<ProfileReviewDTO> getAllProfileReviewsWrittenByUser(int id) {
+        return profileReviewRepository.findAll()
+                .stream()
+                .map(profileReviewDTOMapper)
+                .filter(profileReviewDTO -> profileReviewDTO.written_by_id() == id)
+                .collect(Collectors.toSet());
+    }
+
+    public RatingResponse getAverageRatingForUser(int id) {
+        Set<ProfileReviewDTO> profileReviewDTOs = getAllProfileReviewsForUser(id);
+
+        int nr = 0;
+        float sum = 0;
+
+        for(ProfileReviewDTO profileReviewDTO : profileReviewDTOs) {
+            nr++;
+            sum += profileReviewDTO.rating();
+        }
+
+        if (nr != 0) {
+            return new RatingResponse(sum/nr, nr);
+        } else {
+            return new RatingResponse(0, 0);
+        }
     }
 
     public Set<ProfileReviewDTO> getAllProfileReviews() {

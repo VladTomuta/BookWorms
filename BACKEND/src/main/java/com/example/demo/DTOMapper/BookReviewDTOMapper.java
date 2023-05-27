@@ -16,7 +16,7 @@ public class BookReviewDTOMapper implements Function<BookReview, BookReviewDTO> 
                 bookReview.getDescription(),
                 bookReview.getRating(),
                 bookReview.getAddressed_to_id(),
-                bookReview.getDate_of_review()
+                bookReview.getDate_of_review().toString()
         );
     }
 }

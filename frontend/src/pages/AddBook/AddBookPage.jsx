@@ -35,7 +35,7 @@ function AddBookPage() {
     try {
       console.log(user);
       console.log(user.user_id);
-      await axios.post(`http://127.0.0.1:8080/books/${user.user_id}/addBook`, book)
+      await axios.post(`http://127.0.0.1:8080/books/addBook/${user.user_id}`, book)
       .then((res) =>
         {
           console.log(res.data);

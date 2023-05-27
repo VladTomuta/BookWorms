@@ -8,6 +8,6 @@ public record ProfileReviewDTO(
         String description,
         Float rating,
         Integer addressed_to_id,
-        LocalDate date_of_review
+        String date_of_review
 ) {
 }

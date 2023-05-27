@@ -35,7 +35,6 @@ public class Book {
     @ManyToMany
     private Set<User> ownersOfTheBook = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_book_id", referencedColumnName = "book_id")
+    @OneToMany(mappedBy = "addressed_to_id", cascade = CascadeType.ALL)
     private List<BookReview> bookReviews;
 }

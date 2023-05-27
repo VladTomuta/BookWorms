@@ -4,20 +4,20 @@ import com.example.demo.DTO.RentDTO;
 import com.example.demo.Entity.Rent;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.function.Function;
 
 @Service
 public class RentDTOMapper implements Function<Rent, RentDTO> {
-
     @Override
     public RentDTO apply(Rent rent) {
         return new RentDTO(
-                rent.getRent_id(),
-                rent.getRented_by_id(),
-                rent.getRenter_id(),
-                rent.getBook_id(),
-                rent.getDate_of_rental(),
-                rent.getDate_of_return(),
+                rent.getRentId(),
+                rent.getRentedById(),
+                rent.getRenterId(),
+                rent.getBookId(),
+                rent.getDateOfRental().toString(),
+                rent.getDateOfReturn().toString(),
                 rent.getStatus()
         );
     }

@@ -16,7 +16,7 @@ public class ProfileReviewDTOMapper implements Function<ProfileReview, ProfileRe
                 profileReview.getDescription(),
                 profileReview.getRating(),
                 profileReview.getAddressed_to_id(),
-                profileReview.getDate_of_review()
+                profileReview.getDate_of_review().toString()
         );
     }
 }

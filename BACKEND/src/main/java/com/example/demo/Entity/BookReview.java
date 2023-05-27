@@ -25,4 +25,12 @@ public class BookReview {
     private int addressed_to_id;
     @Column(name = "date_of_review", columnDefinition = "DATE")
     private LocalDate date_of_review;
+
+    public BookReview(int written_by_id, String description, float rating, int addressed_to_id, LocalDate date_of_review) {
+        this.written_by_id = written_by_id;
+        this.description = description;
+        this.rating = rating;
+        this.addressed_to_id = addressed_to_id;
+        this.date_of_review = date_of_review;
+    }
 }

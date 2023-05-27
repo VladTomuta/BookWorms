@@ -4,6 +4,7 @@ import com.example.demo.DTO.*;
 import com.example.demo.DTOMapper.BookDTOMapper;
 import com.example.demo.DTOMapper.FullUserDTOMapper;
 import com.example.demo.DTOMapper.UserDTOMapper;
+import com.example.demo.Entity.Book;
 import com.example.demo.Entity.User;
 import com.example.demo.Exception.IncorrectIdException;
 import com.example.demo.Repository.BookRepository;
@@ -60,13 +61,36 @@ public class UserService {
                   .orElseThrow(IncorrectIdException::new);
     }
 
-    public Set<UserDTO> getAllUsers() {
+    public Set<FullUserDTO> getAllUsers() {
         return  userRepository.findAll()
                 .stream()
-                .map(userDTOMapper)
+                .map(fullUserDTOMapper)
                 .collect(Collectors.toSet());
     }
 
+    public FullUserDTO updateUser(int id, User user) {
+        if(userRepository.findById(id).isPresent()){
+            User actualUser = userRepository.findById(id).get();
+            if(user.getEmail() != null){
+                actualUser.setEmail(user.getEmail());
+            }
+            if(user.getPassword() != null){
+                actualUser.setPassword(user.getPassword());
+            }
+            if(user.getFullName() != null){
+                actualUser.setFullName(user.getFullName());
+            }
+            if(user.getPhoneNumber() != null){
+                actualUser.setPhoneNumber(user.getPhoneNumber());
+            }
+            if(user.getRegion() != null){
+                actualUser.setRegion(user.getRegion());
+            }
+            return fullUserDTOMapper.apply(userRepository.saveAndFlush(user));
+        }
+        //return some exception.
+        throw new IncorrectIdException();
+    }
     public Set<BookDTO> getBooksOwnedById(int id) {
         if(userRepository.findById(id).isPresent()){
             User actualUser = userRepository.findById(id).get();
