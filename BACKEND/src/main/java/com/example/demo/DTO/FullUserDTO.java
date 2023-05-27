@@ -1,5 +1,7 @@
 package com.example.demo.DTO;
 
+import com.example.demo.Entity.Role;
+
 public record FullUserDTO(
         Integer user_id,
         String username,
@@ -8,6 +10,6 @@ public record FullUserDTO(
         String email,
         String region,
         String password,
-        String role
+        Role role
 ){
 }

@@ -60,7 +60,7 @@ function LogInPage() {
         {        
           if(res.data.status == true)
           {
-            console.log(res.data.user.role);
+            console.log(res.data.token);
             addUser(res.data.user);
             sessionStorage.setItem('user', JSON.stringify(res.data.user));
 

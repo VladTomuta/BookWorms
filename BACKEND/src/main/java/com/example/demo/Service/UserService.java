@@ -1,10 +1,12 @@
 package com.example.demo.Service;
 
+import com.example.demo.Config.JwtService;
 import com.example.demo.DTO.*;
 import com.example.demo.DTOMapper.BookDTOMapper;
 import com.example.demo.DTOMapper.FullUserDTOMapper;
 import com.example.demo.DTOMapper.UserDTOMapper;
 import com.example.demo.Entity.Book;
+import com.example.demo.Entity.Role;
 import com.example.demo.Entity.User;
 import com.example.demo.Exception.IncorrectIdException;
 import com.example.demo.Repository.BookRepository;
@@ -41,6 +43,8 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
+    private JwtService jwtService;
 
     public UserService(UserRepository userRepository, FullUserDTOMapper fullUserDTOMapper, UserDTOMapper userDTOMapper) {
         this.userRepository = userRepository;
@@ -159,7 +163,7 @@ public class UserService {
                         signupDTO.phoneNumber(),
                         signupDTO.email(),
                         this.passwordEncoder.encode(signupDTO.password()),
-                        "USER"
+                        Role.USER
                 );
 
                 addUser(user);
@@ -187,15 +191,18 @@ public class UserService {
             boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
             if (isPwdRight) {
                 //User userOptional = userRepository.findOneByEmailAndPassword(loginDTO.emailOrPhoneNumber(), encodedPassword);
-                return new LoginResponse(userInDatabase, true);
+
+                var jwtToken = jwtService.generateToken(userInDatabase);
+
+                return new LoginResponse(userInDatabase, true, jwtToken);
 
                 //return userOptional.map(user -> new LoginResponse(user, true)).orElseGet(() -> new LoginResponse(null, false));
             } else {
 
-                return new LoginResponse(null, false);
+                return new LoginResponse(null, false, "");
             }
         }else {
-            return new LoginResponse(null, false);
+            return new LoginResponse(null, false, "");
         }
     }
 }

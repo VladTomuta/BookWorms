@@ -5,6 +5,7 @@ import com.example.demo.DTO.LoginDTO;
 import com.example.demo.DTO.SignupDTO;
 import com.example.demo.DTO.UserDTO;
 import com.example.demo.DTO.FullUserDTO;
+import com.example.demo.Entity.Role;
 import com.example.demo.Entity.User;
 import com.example.demo.Response.LoginResponse;
 import com.example.demo.Response.SignupResponse;
@@ -40,7 +41,7 @@ public class UserController {
                 signupDTO.phoneNumber(),
                 signupDTO.email(),
                 this.passwordEncoder.encode(signupDTO.password()),
-                "USER"
+                Role.USER
         );
 
         return userService.addUser(user);

@@ -12,7 +12,16 @@ export default function Home() {
   }, []);
 
   const loadUsers = async () => {
-    const result = await axios.get("http://127.0.0.1:8080/users/getAllUsers");
+
+    const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rd29ybXNAZ21haWwuY29tIiwiaWF0IjoxNjg1MjI0MDE3LCJleHAiOjE2ODUyMjU0NTd9.6wdOk7g5M5eVPiKWgRq4RHgDmMBSJFBBHLb4IolS0YM"
+
+        const headers = {
+          'Authorization': `Bearer ${token}`
+        }
+
+        console.log(headers);
+
+    const result = await axios.get("http://127.0.0.1:8080/users/getAllUsers", { headers: headers });
     setUsers(result.data);
   };
 

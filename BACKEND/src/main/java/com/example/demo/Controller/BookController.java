@@ -15,7 +15,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/books")
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 @Tag(name = "Book")
 public class BookController {
     @Autowired
