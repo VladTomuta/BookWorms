@@ -1,16 +1,12 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import YourSvg from "../../assets/logo_bookworms.svg";
-import UserContext from '../../pages/LogIn/UserContext/UserContext';
-import {useContext} from 'react';
 import './AddBookPage.css'
 
 function AddBookPage() {
 
-//    const sessionUser = JSON.parse(sessionStorage.getItem('user'));
-
-    const {user} = useContext(UserContext);
+    const user = JSON.parse(sessionStorage.getItem('user'));
 
     const [book, setBook] = useState(
       {
@@ -24,32 +20,38 @@ function AddBookPage() {
 
     const onInputChange=(e)=>{
         setBook({...book,[e.target.name]:e.target.value})
+        console.log(book);
     }
 
     const navigate = useNavigate();
     
 
-    const handleOnAddBookButton = async (e) => {
-      e.preventDefault();
-      console.log(book);
-    
-      try {
-        console.log(user);
-        console.log(user.user_id);
-    
-        await axios.post(`http://127.0.0.1:8080/books/addBook/${user.user_id}`, book)
-          .then((res) => {
-            console.log(res.data);
-            navigate("/loggedIn");
-          })
-          .catch((error) => {
-            console.error(error); // Handle the error
-          });
-      } catch (err) {
-        alert(err);
-      }
-    };
+  const handleOnAddBookButton = async (e) => {
+    e.preventDefault()
+    console.log(book)
 
+    try {
+      console.log(user);
+      console.log(user.user_id);
+      await axios.post(`http://127.0.0.1:8080/books/addBook/${user.user_id}`, book)
+      .then((res) =>
+        {
+          console.log(res.data);
+
+            navigate("/loggedIn");
+        
+      }, fail => {
+        console.error(fail); // Error!
+         });
+    }
+      catch (err) {
+      alert(err);
+    }
+  }
+
+  useEffect(() =>{
+    console.log(book);
+  },[book]);
   const navigateToHomePage = () => {
     navigate("/");
   }
@@ -71,7 +73,6 @@ function AddBookPage() {
           <input id='addBookInput' type="text" placeholder='genre' name='genre' value={genre} onChange={(e)=>onInputChange(e)}></input>
           
           <button className='addBookButton' onClick={handleOnAddBookButton}>Add Book</button>
-          <div className='line'></div>
           <button className='CancelButton' onClick={navigateToLoggedInPage}>Cancel</button>
         </form>
       </div>
