@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import './AdminPage.css'
 
 export default function Home() {
   const [users, setUsers] = useState([]);
@@ -29,10 +30,10 @@ export default function Home() {
 
   useEffect(() => {
     //la fiecare load de pagina mai intai verifici care ii rolul user-ului
-    checkUserRole();
+    //checkUserRole();
 
     //daca userul are access la pagina regenereaza token-ul ca sa nu mai ai sesiuni de doar 15 minute
-    regenerateJwtToken();
+    //regenerateJwtToken();
 
     loadUsers();
   }, []);
@@ -83,30 +84,32 @@ export default function Home() {
   };
 
   const deleteUser = async (id) => {
-    await axios.delete(`http://127.0.0.1:8080/users/deleteUser/${id}`);
+    await axios.delete(`http://127.0.0.1:8080/users/deleteUser/${id}`, { headers: headers });
     loadUsers();
   };
 
   return (
     <div className="container">
-      <div className="py-4">
+      
         <table className="table border shadow">
           <thead>
-            <tr>
-              <th scope="col">Nr.</th>
-              <th scope="col">Id</th>
-              <th scope="col">Full Name</th>
-              <th scope="col">Username</th>
-              <th scope="col">Email</th>
-              <th scope="col">Phone Number</th>
-              <th scope="col">Action</th>
-            </tr>
+              <tr>
+                
+                  <th scope="col">Nr.</th>
+                  <th scope="col">Id</th>
+                  <th scope="col">Full Name</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Phone Number</th>
+                  <th scope="col">Action</th>
+                
+              </tr>
           </thead>
           <tbody>
             {users
                 .filter(user => user.role === "USER")
                 .map((user, index) => (
-                    <tr key={user.user_id}>
+                    <tr className="rowTable" key={user.user_id}>
                         <th scope="row">
                             {index + 1}
                         </th>
@@ -116,24 +119,21 @@ export default function Home() {
                         <td>{user.email}</td>
                         <td>{user.phoneNumber}</td>
                         <td>
-                            <Link
-                                className="btn btn-outline-primary mx-2"
-                                to={`/edituser/${user.user_id}`}
-                            >
-                                Edit
-                            </Link>
                             <button
-                                className="btn btn-danger mx-2"
+                                className="btn btn-danger mx-2 "
                                 onClick={() => deleteUser(user.user_id)}
                             >
-                            Delete
+                              <span className="material-symbols-outlined md-24">
+                                delete
+                              </span>
+                            
                             </button>
                         </td>
                     </tr>
             ))}
           </tbody>
         </table>
-      </div>
+      
     </div>
   );
 }

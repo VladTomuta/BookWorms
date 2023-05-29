@@ -3,6 +3,8 @@ package com.example.demo.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -36,9 +38,6 @@ public class User implements UserDetails {
     @Column(name = "password", columnDefinition = "VARCHAR(255)")
     private String password;
 
-    /*@Column(name ="role", columnDefinition = "VARCHAR(255)")
-    private String role;*/
-
     @Column(name = "role", columnDefinition = "VARCHAR(255)")
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -47,6 +46,7 @@ public class User implements UserDetails {
     @JoinTable(name = "user_book",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn( name =  "book_id"))
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnoreProperties("ownersOfTheBook")
     private Set<Book> booksIOwn = new HashSet<>();
 

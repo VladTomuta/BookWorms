@@ -1,0 +1,64 @@
+:root{
+    --green: rgb(129, 144, 124);
+    --smarald: #174248;
+   --light-blue: rgb(99, 118, 110);
+   --dark: #0f2a2e;
+}
+
+body {
+    height: 100vh;
+    background-color: var(--dark);
+}
+
+.container {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    margin-top: 7vw;
+    border-radius: 30px;
+    border:none;
+    background-color: var(--green);
+    border-collapse:collapse;
+    width: 86vw;
+    padding: 10px;
+    overflow: hidden;
+    box-shadow: 1px 1px 1px 1px var(--green);
+    height: 50%;
+}
+
+th, td{
+    padding: 8px ;
+}
+
+td{
+    border-bottom: 1px solid #626e5e;
+    text-align: center;
+}
+
+tbody tr:hover{
+    background-color: rgba(99, 118, 110, 0.3);
+}
+
+table thead tr{
+    background: var(--light-blue);
+    border: none;
+    height: 5vh;
+}
+
+.rowTable {
+    height: 2vh;
+}
+
+table button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+table button span:hover{
+    color: rgba(0,0,0, 0.7);
+}
