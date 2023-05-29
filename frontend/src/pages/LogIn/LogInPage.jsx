@@ -3,48 +3,28 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import YourSvg from "../../assets/logo_bookworms.svg";
 import "./LogInPage.css"
-import UserContext from './UserContext/UserContext';
-import { useContext } from 'react';
 
 function LogInPage() {
-
-  const {addUser} = useContext(UserContext);
   
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
+  const navigate = useNavigate();
 
-    /*
-    const [users, setUsers] = useState([]);
-
-    useEffect(() => {
-      loadUsers();
-    }, []);
-    */
-
-    // const loadUsers = async () => {
-    //   const result = await axios.get("http://127.0.0.1:8080/users/getAllUsers")
-    //   console.log(result.data);
-    // }
-
-
-    const navigate = useNavigate();
-
-    const setEmailOnChange = (e) =>{
-        setEmail(e.target.value);
-    }
-
+  const setEmailOnChange = (e) =>{
+      setEmail(e.target.value);
+  }
+ 
+  const setPasswordOnChange = (e) =>{
+      setPassword(e.target.value);
+  }
     
-    const setPasswordOnChange = (e) =>{
-        setPassword(e.target.value);
-    }
-    
-    const LogInViaFacebook = (e) =>{
-      return true
-    }
+  const LogInViaFacebook = (e) =>{
+    return true
+  }
 
-    const LogInViaGoogle = (e) =>{
-      return true
-    }
+  const LogInViaGoogle = (e) =>{
+    return true
+  }
 
   const navigateToHomePage = () => {
     navigate("/");
@@ -61,7 +41,6 @@ function LogInPage() {
           if(res.data.status == true)
           {
             console.log(res.data.user.role);
-            addUser(res.data.user);
             sessionStorage.setItem('user', JSON.stringify(res.data.user));
 
             if(res.data.user.role == "USER") {

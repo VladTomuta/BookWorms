@@ -1,21 +1,14 @@
 import React, {useEffect} from 'react'
 import './ProfileSideBar.css'
 import {useNavigate} from 'react-router-dom'
-import UserContext from '../../pages/LogIn/UserContext/UserContext';
-import {useContext} from 'react';
 
 
 function ProfileSideBar() {
 
   const navigate = useNavigate();
 
-  const {user} = useContext(UserContext);
-  //const userObj = JSON.parse(sessionStorage.getItem('user'));
+  const user = JSON.parse(sessionStorage.getItem('user'));
 
-  //useEffect(() => {
- //}, [user]);
-
-  
   return (
     <div className='Profile-Container'>
         <div className='profilePicture'>
@@ -27,7 +20,7 @@ function ProfileSideBar() {
               <span className='buttonTitle'>My Profile</span>
           </div>
           <div className='profile-button'>
-              <span className='buttonTitle'>Find Books</span>
+              <span className='buttonTitle' onClick={() => navigate("/availableBooks")}>Find Books</span>
           </div>
           <div className='profile-button'>
               <span className='buttonTitle' onClick={() => navigate("/addBook")}>Put a Book yourself</span>

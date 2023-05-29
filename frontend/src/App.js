@@ -7,11 +7,10 @@ import AddBookPage from "./pages/AddBook/AddBookPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React from "react";
 import LoggedInHomePage from "./pages/LoggedInHomePage/LoggedInHomePage";
-import { UserProvider } from "./pages/LogIn/UserContext/UserContext";
+import AllBooksPage from "./pages/AllBooksPage/AllBooksPage";
 
 function App() {
 	return (
-		<UserProvider>
 			<Router>
 				<Routes>
 					<Route path="/" element={<HomePage />} />
@@ -20,9 +19,9 @@ function App() {
 					<Route path="/admin" element={<AdminPage />} />
 					<Route path="/loggedIn" element={<LoggedInHomePage />} />
 					<Route path="/addBook" element={<AddBookPage />} />
+					<Route path="/availableBooks" element={<AllBooksPage />} />
 				</Routes>
 			</Router>
-		</UserProvider>
 	);
 }
 
