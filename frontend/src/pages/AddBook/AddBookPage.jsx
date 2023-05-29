@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import YourSvg from "../../assets/logo_bookworms.svg";
 import './AddBookPage.css'
+import { addBook } from '../../apis';
 
 function AddBookPage() {
 
     const user = JSON.parse(sessionStorage.getItem('user'));
+    const token =JSON.parse(sessionStorage.getItem('user_token'));
 
     const [book, setBook] = useState(
       {
@@ -28,30 +30,13 @@ function AddBookPage() {
 
   const handleOnAddBookButton = async (e) => {
     e.preventDefault()
-    console.log(book)
+    
+    const response = await addBook(token,user.user_id,book);
+    console.log("success");
 
-    try {
-      console.log(user);
-      console.log(user.user_id);
-      await axios.post(`http://127.0.0.1:8080/books/addBook/${user.user_id}`, book)
-      .then((res) =>
-        {
-          console.log(res.data);
-
-            navigate("/loggedIn");
-        
-      }, fail => {
-        console.error(fail); // Error!
-         });
-    }
-      catch (err) {
-      alert(err);
-    }
+    navigate("/loggedIn");
   }
 
-  useEffect(() =>{
-    console.log(book);
-  },[book]);
   const navigateToHomePage = () => {
     navigate("/");
   }

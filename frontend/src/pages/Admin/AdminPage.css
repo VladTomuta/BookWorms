@@ -19,7 +19,7 @@ body {
 
 table {
     margin-top: 7vw;
-    border-radius: 30px;
+    border-radius: 10px;
     border:none;
     background-color: var(--green);
     border-collapse:collapse;

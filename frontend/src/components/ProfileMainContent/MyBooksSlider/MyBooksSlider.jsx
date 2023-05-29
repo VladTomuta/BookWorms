@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './MyBooksSlider.css'
-import ImagePlaceholder from '../images/No-Image-Placeholder.svg.png'
+import ImagePlaceholder from '../images/No-Image-Placeholder.png'
 import BookCard from '../../BookCard/BookCard'
 import {getBooksOwnedByUser} from '../../../apis'
 
@@ -27,7 +27,7 @@ export default function MyBooksSlider() {
     <div className='MyBooksSliderContainer'>
         <span id='MyBooksTitle'>My books</span>
         <div className='BooksSlider'>
-        <Carousel width="300px" showIndicators={false}>
+        <Carousel width="300px" showIndicators={false} showThumbs={false}>
             {books ? (books.map(b => {
                 return <BookCard
                 key = {b.id}
