@@ -40,14 +40,10 @@ function LogInPage() {
         {        
           if(res.data.status == true)
           {
-<<<<<<< HEAD
-            console.log(res.data.user.role);
-=======
             //asta ii tokenul pe care trebuie sa il salvezi local pentru fiecare api in afara de users/signup si users/login
             console.log(res.data.token);
-            addUser(res.data.user);
->>>>>>> 3fa3a8eeaddbe97c0b4f4e044e1c812bbdc8d5d7
             sessionStorage.setItem('user', JSON.stringify(res.data.user));
+            sessionStorage.setItem('user_token', JSON.stringify(res.data.token));
 
             if(res.data.user.role == "USER") {
               navigate("/loggedIn")

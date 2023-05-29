@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import UserContext from '../../pages/LogIn/UserContext/UserContext';
-import {useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
@@ -11,13 +9,13 @@ export default function Home() {
   const { id } = useParams();
 
   //trebuie sa iei userul salvat local (ii la fel daca ai schimbat din useContext in local storage)
-  const {user} = useContext(UserContext);
 
   //token-ul asta ii hard codat ca sa verific eu daca merge
   //trebuie luat si el de unde ii stocat local
   //il primesti in raspuns cand dai login
   //ti-am pus si acolo comentariu de unde sa il iei
-  const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rd29ybXNAZ21haWwuY29tIiwiaWF0IjoxNjg1MzQ5MzExLCJleHAiOjE2ODUzNTA3NTF9.4MutfBfxQ2jbSKhU1eRGlvtEG7Fg9F6uUeOhpC2Ozhw"
+  const token = JSON.parse(sessionStorage.getItem('user_token'));
+  const user = JSON.parse(sessionStorage.getItem('user'));
 
   //trebuie sa construiesti un header pentru mesaj care sa fie de forma asta
   //doar il copiezi de aici unde iti trebuie
@@ -64,9 +62,9 @@ export default function Home() {
   const regenerateJwtToken = async () => {
     try {
       //regenereaza jwt token-ul
-      const token = await axios.get(`http://127.0.0.1:8080/users/getRoleOfUser/${user.user_id}`, { headers: headers});
+      const Localtoken = await axios.get(`http://127.0.0.1:8080/users/getRoleOfUser/${user.user_id}`, { headers: headers});
 
-      console.log(token);
+      token = Localtoken;
 
       //trebuie sa il stochezi local
       

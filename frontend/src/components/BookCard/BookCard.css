@@ -1,9 +1,11 @@
 .BookCard-Container{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     margin: 0px 25px;
     width: 200px;
-    padding: 15px 0px 15px 25px;
+    padding: 15px;
 
     background-color: #576a6d;
     border-radius: 25px;

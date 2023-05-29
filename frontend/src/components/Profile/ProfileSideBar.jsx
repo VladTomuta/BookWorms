@@ -14,7 +14,7 @@ function ProfileSideBar() {
         <div className='profilePicture'>
             <span id='profile-picture-placeholder'>{user.username}</span>
         </div>
-        <span id='below-profilePic'>{user.email}</span>
+        <span id='below-profilePic' style={{padding:"0px 10px"}}>{user.username}</span>
         <div className='profileButtonsContainer'>
           <div className='profile-button'>
               <span className='buttonTitle'>My Profile</span>

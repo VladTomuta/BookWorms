@@ -5,9 +5,12 @@ import './AllBooksPage.css'
 export default function AllBooksPage() {
     const [allBooks, setAllBooks] = useState();
 
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    const token = JSON.parse(sessionStorage.getItem('user_token'));
+
     useEffect(() =>{
         const getAllBooksProperly = async () => {
-            const response = await getAllBooks();
+            const response = await getAllBooks(token);
             setAllBooks(response);
         }
 

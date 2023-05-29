@@ -53,9 +53,6 @@ function LogInPage() {
   const handleOnSubmitButton = async (e) => {
     e.preventDefault()
     console.log(user)
-
-    
-
     try {
       await axios.post("http://127.0.0.1:8080/users/signup",user)
       .then((res) =>
