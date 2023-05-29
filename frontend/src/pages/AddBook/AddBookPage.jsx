@@ -37,7 +37,8 @@ function AddBookPage() {
       .then((res) =>
         {
           console.log(res.data);
-          navigate("/loggedIn");
+
+            navigate("/loggedIn");
         
       }, fail => {
         console.error(fail); // Error!

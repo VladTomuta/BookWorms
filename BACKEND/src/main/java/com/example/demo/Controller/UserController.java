@@ -5,6 +5,7 @@ import com.example.demo.DTO.LoginDTO;
 import com.example.demo.DTO.SignupDTO;
 import com.example.demo.DTO.UserDTO;
 import com.example.demo.DTO.FullUserDTO;
+import com.example.demo.Entity.Role;
 import com.example.demo.Entity.User;
 import com.example.demo.Response.LoginResponse;
 import com.example.demo.Response.SignupResponse;
@@ -40,7 +41,7 @@ public class UserController {
                 signupDTO.phoneNumber(),
                 signupDTO.email(),
                 this.passwordEncoder.encode(signupDTO.password()),
-                "USER"
+                Role.USER
         );
 
         return userService.addUser(user);
@@ -104,4 +105,12 @@ public class UserController {
     @Operation(summary = "Get all books not owned by a user")
     @GetMapping("/getAllBooksNotOwned/{id}")
     public Set<BookDTO> getAllBooksNotOwned(@PathVariable int id) {return userService.getAllBooksNotOwned(id);}
+
+    @Operation(summary = "Get role of user (in order to check if the user is allowed on that url or not)")
+    @GetMapping("/getRoleOfUser/{id}")
+    public Role getRoleOfUser(@PathVariable int id) {return userService.getRoleOfUser(id);}
+
+    @Operation(summary = "Regenerate the jwt token of a user")
+    @GetMapping("/regenerateUserToken/{id}")
+    public String regenerateUserToken(@PathVariable int id) {return userService.regenerateUserToken(id);}
 }

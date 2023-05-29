@@ -3,14 +3,18 @@ package com.example.demo.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder @Data
 @Entity(name = "users")
-public class User /*implements UserDetails*/ {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int user_id;
@@ -32,8 +36,12 @@ public class User /*implements UserDetails*/ {
     @Column(name = "password", columnDefinition = "VARCHAR(255)")
     private String password;
 
-    @Column(name ="role", columnDefinition = "VARCHAR(255)")
-    private String role;
+    /*@Column(name ="role", columnDefinition = "VARCHAR(255)")
+    private String role;*/
+
+    @Column(name = "role", columnDefinition = "VARCHAR(255)")
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @ManyToMany
     @JoinTable(name = "user_book",
@@ -48,7 +56,7 @@ public class User /*implements UserDetails*/ {
     @OneToMany(mappedBy = "written_by_id", cascade = CascadeType.ALL)
     private List<BookReview> bookReviews;
 
-    public User(String username, String fullName, String region, String phoneNumber, String email, String password, String role) {
+    public User(String username, String fullName, String region, String phoneNumber, String email, String password, Role role) {
         this.username = username;
         this.fullName = fullName;
         this.region = region;
@@ -56,5 +64,30 @@ public class User /*implements UserDetails*/ {
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
