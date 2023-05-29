@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
-@OpenAPIDefinition(info = @Info(title = "Library APIs", version = "1.0.", description = "Library Management"))
+@OpenAPIDefinition(info = @Info(title = "Bookworms APIs", version = "1.0.0", description = "Library Management"))
 public class ProjectFisApplication {
 
 	public static void main(String[] args) {

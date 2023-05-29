@@ -84,12 +84,15 @@ public class BookService {
                 .collect(Collectors.toSet());
     }
 
-    public Set<BookDTO> getAllAvailableBooks() {
-        Set<BookDTO> allBooks = bookRepository
-                .findAll()
-                .stream()
-                .map(bookDTOMapper)
-                .collect(Collectors.toSet());
+    public Set<BookDTO> getAllAvailableBooks(int id) {
+
+        UserService userService = new UserService();
+
+        Set<BookDTO> allBooks = userService.getAllBooksNotOwned(id);//bookRepository
+        //        .findAll()
+        //        .stream()
+        //        .map(bookDTOMapper)
+        //        .collect(Collectors.toSet());
 
         Set<RentDTO> allRents = rentRepository
                 .findAll()

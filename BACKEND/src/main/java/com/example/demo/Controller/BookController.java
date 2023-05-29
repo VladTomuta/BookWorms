@@ -68,9 +68,9 @@ public class BookController {
     }
 
     @Operation(summary = "Get all available book")
-    @GetMapping("/getAllAvailableBooks")
-    public Set<BookDTO> getAllAvailableBooks() {
-        return bookService.getAllAvailableBooks();
+    @GetMapping("/getAllAvailableBooks/{id}")
+    public Set<BookDTO> getAllAvailableBooks(int id) {
+        return bookService.getAllAvailableBooks(id);
     }
 
     @Operation(summary = "Get all owners of a book given by id")
