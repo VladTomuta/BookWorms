@@ -109,4 +109,8 @@ public class UserController {
     @Operation(summary = "Get role of user (in order to check if the user is allowed on that url or not)")
     @GetMapping("/getRoleOfUser/{id}")
     public Role getRoleOfUser(@PathVariable int id) {return userService.getRoleOfUser(id);}
+
+    @Operation(summary = "Regenerate the jwt token of a user")
+    @GetMapping("/regenerateUserToken/{id}")
+    public String regenerateUserToken(@PathVariable int id) {return userService.regenerateUserToken(id);}
 }

@@ -214,4 +214,15 @@ public class UserService {
             return new LoginResponse(null, false, "");
         }
     }
+
+    public String regenerateUserToken(int id) {
+
+        Optional<User> user = userRepository.findById(id);
+
+        if(user.isPresent()) {
+            return jwtService.generateToken(user.get());
+        }
+
+        throw new IncorrectIdException();
+    }
 }
