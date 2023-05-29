@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
@@ -86,51 +87,62 @@ public class BookService {
 
     public Set<BookDTO> getAllAvailableBooks(int id) {
 
-        UserService userService = new UserService();
+        Optional<User> user = userRepository.findById(id);
 
-        Set<BookDTO> allBooks = userService.getAllBooksNotOwned(id);//bookRepository
-        //        .findAll()
-        //        .stream()
-        //        .map(bookDTOMapper)
-        //        .collect(Collectors.toSet());
+        if(user.isPresent())
+        {
+            Set<BookDTO> ownerBooks = user.get().getBooksIOwn()
+                    .stream()
+                    .map(bookDTOMapper)
+                    .collect(Collectors.toSet());
 
-        Set<RentDTO> allRents = rentRepository
-                .findAll()
-                .stream()
-                .map(rentDTOMapper)
-                .collect(Collectors.toSet());
+            Set<BookDTO> books = bookRepository.findAll()
+                    .stream()
+                    .map(bookDTOMapper)
+                    .filter(Predicate.not(ownerBooks::contains))
+                    .collect(Collectors.toSet());
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            //return books;
 
-        Set<BookDTO> availableBooks = new HashSet<>();
+            Set<RentDTO> allRents = rentRepository
+                    .findAll()
+                    .stream()
+                    .map(rentDTOMapper)
+                    .collect(Collectors.toSet());
 
-        for (BookDTO book : allBooks) {
-            //System.out.println(book.book_id());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-            int numberOfOwners = book.ownersOfTheBookId().size();
+            Set<BookDTO> availableBooks = new HashSet<>();
 
-            System.out.println(book.book_id());
-            System.out.println(numberOfOwners);
+            System.out.println(id);
 
-            for (RentDTO rent : allRents) {
-                //System.out.println(rent.rentId());
-                if (Objects.equals(rent.bookId(), book.book_id()) &&
-                        LocalDate.parse(rent.dateOfReturn(), formatter).isAfter(LocalDate.now())) {
-                    numberOfOwners--;
+            for (BookDTO book : books) {
+                //System.out.println(book.book_id());
+
+                int numberOfOwners = book.ownersOfTheBookId().size();
+
+                System.out.println(book.book_id());
+                System.out.println(numberOfOwners);
+
+                for (RentDTO rent : allRents) {
+                    //System.out.println(rent.rentId());
+                    if (Objects.equals(rent.bookId(), book.book_id()) &&
+                            LocalDate.parse(rent.dateOfReturn(), formatter).isAfter(LocalDate.now())) {
+                        numberOfOwners--;
+                    }
+                }
+
+                System.out.println(numberOfOwners);
+                System.out.println();
+
+                if (numberOfOwners > 0) {
+                    availableBooks.add(book);
                 }
             }
 
-            System.out.println(numberOfOwners);
-            System.out.println();
-
-            if (numberOfOwners > 0) {
-                availableBooks.add(book);
-            }
+            return availableBooks;
         }
-
-
-
-        return availableBooks;
+        throw new IncorrectIdException();
     }
 
     public Set<UserDTO> getAllOwnersOfBook(int bookId) {

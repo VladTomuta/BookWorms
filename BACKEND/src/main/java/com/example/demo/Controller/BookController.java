@@ -69,11 +69,12 @@ public class BookController {
 
     @Operation(summary = "Get all available book")
     @GetMapping("/getAllAvailableBooks/{id}")
-    public Set<BookDTO> getAllAvailableBooks(int id) {
+    public Set<BookDTO> getAllAvailableBooks(@PathVariable int id) {
+        System.out.println("ceva" + id);
         return bookService.getAllAvailableBooks(id);
     }
 
     @Operation(summary = "Get all owners of a book given by id")
-    @GetMapping("getAllOwnersOfBook/{id}")
+    @GetMapping("/getAllOwnersOfBook/{id}")
     public Set<UserDTO> getAllOwnersOfBook(@PathVariable int id){return bookService.getAllOwnersOfBook(id);}
 }
