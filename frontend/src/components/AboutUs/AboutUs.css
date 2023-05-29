@@ -25,7 +25,7 @@
     margin: 25px 0px 26px 35px;
     font-size: 20px;
     font-weight: 100;
-    width: 1200px;
+    width: auto;
     align-self: center;
 }
 .aboutUs-logo-container #logo{
@@ -38,7 +38,7 @@
 .description{
     display: flex;
     flex-direction: column;
-    width: 1200px;
+    width: auto;
 }
 
 .aboutUs-vlad-container{
@@ -57,7 +57,7 @@
 .vlad-description{
     display: flex;
     flex-direction: column;
-    width: 1200px;
+    width: auto;
     text-align: right;
 }
 

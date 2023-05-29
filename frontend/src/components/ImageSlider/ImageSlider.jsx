@@ -4,7 +4,7 @@ import i1 from "./images/image1.jpg"
 import i2 from "./images/image2.jpg"
 import i3 from "./images/image3.jpg"
 import {FaArrowAltCircleRight,FaArrowAltCircleLeft} from 'react-icons/fa';
-import YourSvg from "../../assets/logo_bookworms.svg";
+import YourSvg from "../../assets/logo_bookworms.png";
 import HorizontalMenu from '../../components/HorizontalMenu/HorizontalMenu';
 import { useNavigate } from 'react-router-dom';
 
@@ -68,13 +68,14 @@ function ImageSlider() {
     }
     
     return (
-    <div className='slide-container' style={{backgroundImage:`url(${images[currentIndex].image})`}}>
-        <div className='upper-part'>
+    <>
+      <div className='upper-part'>
           <img id="logo-on-homepage" src={YourSvg} alt="Your SVG" onClick={navigateToHomePage}/>
           <div className='horizontalMenu-container'>
             <HorizontalMenu/>
           </div>
-        </div>
+      </div>
+      <div className='slide-container' style={{backgroundImage:`url(${images[currentIndex].image})`}}>
         <div className='lower-part'>
           <FaArrowAltCircleLeft className="left-arrow" onClick={left_button_slide} />
           <div className='bullets_container'>
@@ -84,7 +85,9 @@ function ImageSlider() {
           </div>
           <FaArrowAltCircleRight className="right-arrow" onClick={right_button_slide} />
         </div>
-    </div>
+      </div>
+    </>
+    
   )
 }
 
