@@ -1,36 +1,42 @@
 package com.example.demo.Service;
 
 import com.example.demo.DTO.BookDTO;
+import com.example.demo.DTO.RentDTO;
 import com.example.demo.DTO.UserDTO;
 import com.example.demo.DTOMapper.BookDTOMapper;
+import com.example.demo.DTOMapper.RentDTOMapper;
 import com.example.demo.DTOMapper.UserDTOMapper;
 import com.example.demo.Entity.Book;
 import com.example.demo.Entity.User;
 import com.example.demo.Exception.IncorrectIdException;
 import com.example.demo.Repository.BookRepository;
+import com.example.demo.Repository.RentRepository;
 import com.example.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class BookService {
     @Autowired
     private BookRepository bookRepository;
-
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RentRepository rentRepository;
 
     @Autowired
     private BookDTOMapper bookDTOMapper;
     @Autowired
     private UserDTOMapper userDTOMapper;
+    @Autowired
+    private RentDTOMapper rentDTOMapper;
 
     public BookDTO addBook(int id, Book book){
 
@@ -76,6 +82,52 @@ public class BookService {
                 .stream()
                 .map(bookDTOMapper)
                 .collect(Collectors.toSet());
+    }
+
+    public Set<BookDTO> getAllAvailableBooks() {
+        Set<BookDTO> allBooks = bookRepository
+                .findAll()
+                .stream()
+                .map(bookDTOMapper)
+                .collect(Collectors.toSet());
+
+        Set<RentDTO> allRents = rentRepository
+                .findAll()
+                .stream()
+                .map(rentDTOMapper)
+                .collect(Collectors.toSet());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        Set<BookDTO> availableBooks = new HashSet<>();
+
+        for (BookDTO book : allBooks) {
+            //System.out.println(book.book_id());
+
+            int numberOfOwners = book.ownersOfTheBookId().size();
+
+            System.out.println(book.book_id());
+            System.out.println(numberOfOwners);
+
+            for (RentDTO rent : allRents) {
+                //System.out.println(rent.rentId());
+                if (Objects.equals(rent.bookId(), book.book_id()) &&
+                        LocalDate.parse(rent.dateOfReturn(), formatter).isAfter(LocalDate.now())) {
+                    numberOfOwners--;
+                }
+            }
+
+            System.out.println(numberOfOwners);
+            System.out.println();
+
+            if (numberOfOwners > 0) {
+                availableBooks.add(book);
+            }
+        }
+
+
+
+        return availableBooks;
     }
 
     public Set<UserDTO> getAllOwnersOfBook(int bookId) {
