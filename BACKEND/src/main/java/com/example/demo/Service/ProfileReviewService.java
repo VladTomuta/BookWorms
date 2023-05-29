@@ -5,12 +5,15 @@ import com.example.demo.DTOMapper.ProfileReviewDTOMapper;
 import com.example.demo.Entity.ProfileReview;
 import com.example.demo.Exception.IncorrectIdException;
 import com.example.demo.Repository.ProfileReviewRepository;
+import com.example.demo.Repository.UserRepository;
+import com.example.demo.Response.ProfileReviewResponse;
 import com.example.demo.Response.RatingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,6 +23,9 @@ public class ProfileReviewService {
     private ProfileReviewRepository profileReviewRepository;
     @Autowired
     private ProfileReviewDTOMapper profileReviewDTOMapper;
+
+    @Autowired
+    private UserService userService;
 
     public ProfileReviewDTO addProfileReview(ProfileReview profileReview){
         return profileReviewDTOMapper.apply(profileReviewRepository.saveAndFlush(profileReview));
@@ -33,12 +39,21 @@ public class ProfileReviewService {
                 .orElseThrow(IncorrectIdException::new);
     }
 
-    public Set<ProfileReviewDTO> getAllProfileReviewsForUser(int id) {
-        return profileReviewRepository.findAll()
+    public Set<ProfileReviewResponse> getAllProfileReviewsForUser(int id) {
+        Set<ProfileReviewDTO> profileReviews = profileReviewRepository.findAll()
                 .stream()
                 .map(profileReviewDTOMapper)
                 .filter(profileReviewDTO -> profileReviewDTO.addressed_to_id() == id)
                 .collect(Collectors.toSet());
+
+        Set<ProfileReviewResponse> profileReviewResponses = new HashSet<>();
+
+        for (ProfileReviewDTO profileReviewDTO : profileReviews) {
+            profileReviewResponses.add(new ProfileReviewResponse(profileReviewDTO, userService.getUser(id)));
+        }
+
+
+        return profileReviewResponses;
     }
 
     public Set<ProfileReviewDTO> getAllProfileReviewsWrittenByUser(int id) {
@@ -50,14 +65,14 @@ public class ProfileReviewService {
     }
 
     public RatingResponse getAverageRatingForUser(int id) {
-        Set<ProfileReviewDTO> profileReviewDTOs = getAllProfileReviewsForUser(id);
+        Set<ProfileReviewResponse> profileReviewResponses = getAllProfileReviewsForUser(id);
 
         int nr = 0;
         float sum = 0;
 
-        for(ProfileReviewDTO profileReviewDTO : profileReviewDTOs) {
+        for(ProfileReviewResponse profileReviewResponse : profileReviewResponses) {
             nr++;
-            sum += profileReviewDTO.rating();
+            sum += profileReviewResponse.getProfileReviewDTO().rating();
         }
 
         if (nr != 0) {

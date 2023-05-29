@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 import com.example.demo.DTO.ProfileReviewDTO;
 import com.example.demo.Entity.ProfileReview;
+import com.example.demo.Response.ProfileReviewResponse;
 import com.example.demo.Response.RatingResponse;
 import com.example.demo.Service.ProfileReviewService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -77,7 +78,7 @@ public class ProfileReviewController {
 
     @Operation(summary = "Get all profile reviews addressed to a user given by id")
     @GetMapping("/getAllProfileReviewsForUser/{id}")
-    public Set<ProfileReviewDTO> getAllProfileReviewsForUser(@PathVariable int id) {return profileReviewService.getAllProfileReviewsForUser(id);}
+    public Set<ProfileReviewResponse> getAllProfileReviewsForUser(@PathVariable int id) {return profileReviewService.getAllProfileReviewsForUser(id);}
 
     @Operation(summary = "Get all profile reviews written by a user given by id")
     @GetMapping("/getAllProfileReviewsWrittenByUser/{id}")
