@@ -139,6 +139,19 @@ public class UserService {
 
     public ResponseEntity<String> deleteUser(int id) {
         if(userRepository.findById(id).isPresent()){
+
+            User user = userRepository.findById(id).get();
+
+            Set<Book> userBooks = user.getBooksIOwn();
+
+            for(Book  book: userBooks) {
+                book.getOwnersOfTheBook().remove(user);
+            }
+            userBooks.clear();
+
+            user.getBookReviews().clear();
+            user.getProfileReviews().clear();
+
             userRepository.deleteById(id);
             return new ResponseEntity<String>("Sucsessfully deleted!", HttpStatus.OK);
         }

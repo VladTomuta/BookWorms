@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import UserContext from '../../pages/LogIn/UserContext/UserContext';
 import {useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
+import './AdminPage.css'
 
 export default function Home() {
   const [users, setUsers] = useState([]);
@@ -17,8 +18,7 @@ export default function Home() {
   //trebuie luat si el de unde ii stocat local
   //il primesti in raspuns cand dai login
   //ti-am pus si acolo comentariu de unde sa il iei
-  const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rd29ybXNAZ21haWwuY29tIiwiaWF0IjoxNjg1MzQ5MzExLCJleHAiOjE2ODUzNTA3NTF9.4MutfBfxQ2jbSKhU1eRGlvtEG7Fg9F6uUeOhpC2Ozhw"
-
+  const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rd29ybXNAZ21haWwuY29tIiwiaWF0IjoxNjg1Mzg1ODg3LCJleHAiOjE2ODUzODczMjd9.QdYAb34VJQ0JIn8wwKObIq0UqYbnY_TMbMSJdyPbIqE"
   //trebuie sa construiesti un header pentru mesaj care sa fie de forma asta
   //doar il copiezi de aici unde iti trebuie
   const headers = {
@@ -31,10 +31,10 @@ export default function Home() {
 
   useEffect(() => {
     //la fiecare load de pagina mai intai verifici care ii rolul user-ului
-    checkUserRole();
+    //checkUserRole();
 
     //daca userul are access la pagina regenereaza token-ul ca sa nu mai ai sesiuni de doar 15 minute
-    regenerateJwtToken();
+    //regenerateJwtToken();
 
     loadUsers();
   }, []);
@@ -64,7 +64,7 @@ export default function Home() {
   const regenerateJwtToken = async () => {
     try {
       //regenereaza jwt token-ul
-      const token = await axios.get(`http://127.0.0.1:8080/users/getRoleOfUser/${user.user_id}`, { headers: headers});
+      const token = await axios.get(`http://127.0.0.1:8080/users/getRoleOfUser/${user.user_id}`, { headers: headers });
 
       console.log(token);
 
@@ -85,30 +85,32 @@ export default function Home() {
   };
 
   const deleteUser = async (id) => {
-    await axios.delete(`http://127.0.0.1:8080/users/deleteUser/${id}`);
+    await axios.delete(`http://127.0.0.1:8080/users/deleteUser/${id}`, { headers: headers });
     loadUsers();
   };
 
   return (
     <div className="container">
-      <div className="py-4">
+      
         <table className="table border shadow">
           <thead>
-            <tr>
-              <th scope="col">Nr.</th>
-              <th scope="col">Id</th>
-              <th scope="col">Full Name</th>
-              <th scope="col">Username</th>
-              <th scope="col">Email</th>
-              <th scope="col">Phone Number</th>
-              <th scope="col">Action</th>
-            </tr>
+              <tr>
+                
+                  <th scope="col">Nr.</th>
+                  <th scope="col">Id</th>
+                  <th scope="col">Full Name</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Phone Number</th>
+                  <th scope="col">Action</th>
+                
+              </tr>
           </thead>
           <tbody>
             {users
                 .filter(user => user.role === "USER")
                 .map((user, index) => (
-                    <tr key={user.user_id}>
+                    <tr className="rowTable" key={user.user_id}>
                         <th scope="row">
                             {index + 1}
                         </th>
@@ -118,24 +120,21 @@ export default function Home() {
                         <td>{user.email}</td>
                         <td>{user.phoneNumber}</td>
                         <td>
-                            <Link
-                                className="btn btn-outline-primary mx-2"
-                                to={`/edituser/${user.user_id}`}
-                            >
-                                Edit
-                            </Link>
                             <button
-                                className="btn btn-danger mx-2"
+                                className="btn btn-danger mx-2 "
                                 onClick={() => deleteUser(user.user_id)}
                             >
-                            Delete
+                              <span className="material-symbols-outlined md-24">
+                                delete
+                              </span>
+                            
                             </button>
                         </td>
                     </tr>
             ))}
           </tbody>
         </table>
-      </div>
+      
     </div>
   );
 }
