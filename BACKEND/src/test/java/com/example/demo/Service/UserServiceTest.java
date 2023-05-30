@@ -2,6 +2,7 @@ package com.example.demo.Service;
 
 import com.example.demo.DTOMapper.FullUserDTOMapper;
 import com.example.demo.DTOMapper.UserDTOMapper;
+import com.example.demo.Entity.Role;
 import com.example.demo.Entity.User;
 import com.example.demo.Repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,7 +49,7 @@ class UserServiceTest {
                 "0755069911",
                 "vlad.tomuta@student.upt.ro",
                 passwordEncoder.encode("abc"),
-                "USER"
+                Role.USER
         );
         //when
         userService.addUser(user);
@@ -81,7 +82,7 @@ class UserServiceTest {
                 "0755069911",
                 "vlad.tomuta@student.upt.ro",
                 passwordEncoder.encode("abc"),
-                "USER"
+                Role.USER
         );
 
         given(userRepository.findById(user.getUser_id())).willReturn(Optional.of(user));

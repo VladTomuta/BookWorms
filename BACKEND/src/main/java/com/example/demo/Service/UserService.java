@@ -155,8 +155,15 @@ public class UserService {
             }
             userBooks.clear();
 
-            user.getBookReviews().clear();
-            user.getProfileReviews().clear();
+
+            if(user.getBookReviews() != null) {
+                user.getBookReviews().clear();
+            }
+
+            if(user.getProfileReviews() != null) {
+                user.getProfileReviews().clear();
+            }
+
 
             userRepository.deleteById(id);
             return new ResponseEntity<String>("Sucsessfully deleted!", HttpStatus.OK);

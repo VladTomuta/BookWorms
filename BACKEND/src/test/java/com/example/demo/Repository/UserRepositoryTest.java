@@ -1,5 +1,6 @@
 package com.example.demo.Repository;
 
+import com.example.demo.Entity.Role;
 import com.example.demo.Entity.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -35,7 +36,7 @@ class UserRepositoryTest {
                 phoneNumber,
                 "vlad.tomuta@student.upt.ro",
                 passwordEncoder.encode("abc"),
-                "USER"
+                Role.USER
         );
         userRepository.save(user);
 
@@ -56,7 +57,7 @@ class UserRepositoryTest {
                 "0755069911",
                 email,
                 passwordEncoder.encode("abc"),
-                "USER"
+                Role.USER
         );
         userRepository.save(user);
 
