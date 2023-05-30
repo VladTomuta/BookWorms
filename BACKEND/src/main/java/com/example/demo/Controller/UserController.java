@@ -60,8 +60,8 @@ public class UserController {
     }
 
     @Operation(summary = "Update a user given by id")
-    @PutMapping("/updateBook/{id}")
-    public FullUserDTO updateBook(@PathVariable int id, @RequestBody FullUserDTO fullUserDTO){
+    @PutMapping("/updateUser/{id}")
+    public FullUserDTO updateUser(@PathVariable int id, @RequestBody FullUserDTO fullUserDTO){
 
         User user = new User(
                 fullUserDTO.username(),
