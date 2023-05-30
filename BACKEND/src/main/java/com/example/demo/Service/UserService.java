@@ -76,7 +76,10 @@ public class UserService {
         if(userRepository.findById(id).isPresent()){
             User actualUser = userRepository.findById(id).get();
             if(user.getEmail() != null){
-                actualUser.setEmail(user.getEmail());
+                if(userRepository.findByEmail(user.getEmail()) != null) {
+                    actualUser.setEmail(user.getEmail());
+                }
+                throw new IncorrectIdException();
             }
             if(user.getPassword() != null){
                 actualUser.setPassword(user.getPassword());
@@ -85,7 +88,10 @@ public class UserService {
                 actualUser.setFullName(user.getFullName());
             }
             if(user.getPhoneNumber() != null){
-                actualUser.setPhoneNumber(user.getPhoneNumber());
+                if(userRepository.findByPhoneNumber(user.getPhoneNumber()) != null) {
+                    actualUser.setPhoneNumber(user.getPhoneNumber());
+                }
+                throw new IncorrectIdException();
             }
             if(user.getRegion() != null){
                 actualUser.setRegion(user.getRegion());
